@@ -1,5 +1,6 @@
 const pokedex = document.getElementById('pokedex');
 const P = new Pokedex.Pokedex();
+const sound = new Audio();
 
 var getAllPokemons = () =>
 {
@@ -7,12 +8,14 @@ var getAllPokemons = () =>
     {
         P.getPokemonByName(i) // with Promise
         .then(function(response) {
-        console.log(response);
+        //console.log(response);
 
+        sound.src="../sound/$(i)";
         const Pokemon = {
             name:response.name,
             image:response.sprites['front_default'],
-            id:response.id    
+            id:response.id,
+            cry:sound
         }
         displayPokemon(Pokemon);
     });
@@ -25,8 +28,16 @@ var displayPokemon =(Pokemon)=>{
     <li class="card">
     <img class="card-image" src="${Pokemon.image}"/>
     <h2 class="card-title">${Pokemon.id}. ${Pokemon.name}</h2>
+    <input type="button" value="Click"  onclick="playaudio()">
+    <audio id="audio" src="../sound/${Pokemon.id}.wav" ></audio>
     </li>
     `;
     pokedex.insertAdjacentHTML('beforeend',pokemonHTMLString);
 };
+
+var playaudio= ()=>
+{
+    var audio = document.getElementById("audio");
+    audio.play();
+}
 getAllPokemons();
