@@ -28,14 +28,14 @@ var displayPokemon =(Pokemon)=>{
     <li class="card">
     <img class="card-image" src="${Pokemon.image}"/>
     <h2 class="card-title">${Pokemon.id}. ${Pokemon.name}</h2>
-    <input type="button" value="Click"  onclick="playaudio()">
+    <input type="button" value="Click"  onclick="playaudio(${Pokemon}">
     <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
     </li>
     `;
     pokedex.insertAdjacentHTML('beforeend',pokemonHTMLString);
 };
 
-var playaudio= ()=>
+var playaudio= (Pokemon)=>
 {
     var audio = document.getElementById("audio${Pokemon.id}");
     audio.play();
