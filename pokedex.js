@@ -29,7 +29,7 @@ var displayPokemon =(Pokemon)=>{
     <img class="card-image" src="${Pokemon.image}"/>
     <h2 class="card-title">${Pokemon.id}. ${Pokemon.name}</h2>
     <input type="button" value="Click"  onclick="playaudio()">
-    <audio id="audio" src="../sound/${Pokemon.id}.wav" ></audio>
+    <audio id="audio" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
     </li>
     `;
     pokedex.insertAdjacentHTML('beforeend',pokemonHTMLString);
