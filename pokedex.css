@@ -1,12 +1,22 @@
 .card {
-    list-style: none;
-    background-color: #f4f4f4;
-    color: #222;
-    text-align: center;
+  list-style: none;
+  background-color: #f4f4f4;
+  color: #222;
+  text-align: center;
+}
+.card-title {
+  background-color: lightgreen;
 }
 #pokedex {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 20px;
-    padding-inline-start: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-gap: 20px;
+  padding-inline-start: 0;
+}
+body {
+  background-color: red;
+}
+button {
+  width: 100px;
+  background-color: black;
 }
