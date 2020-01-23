@@ -20,3 +20,14 @@ button {
   width: 100px;
   background-color: black;
 }
+
+.card > .shiny {
+  display: none;
+}
+.card:hover > .shiny {
+  display: block;
+  margin: auto;
+}
+.card:hover > .default {
+  display: none;
+}

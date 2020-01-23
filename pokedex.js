@@ -9,8 +9,9 @@ var getAllPokemons = () => {
 
         const Pokemon = {
           name: response.name,
-          image: response.sprites["front_default"],
+          default: response.sprites["front_default"],
           shiny: response.sprites["front_shiny"],
+          display: response.sprites["front_default"],
           id: response.id
         };
         displayPokemon(Pokemon);
@@ -21,7 +22,7 @@ var getAllPokemons = () => {
 var displayPokemon = Pokemon => {
   var pokemonHTMLString = `
     <li class="card">
-        <img class="card-image default" src="${Pokemon.image}"/>
+        <img class="card-image default" src="${Pokemon.display}" >
         <img class="card-image shiny" src="${Pokemon.shiny}"/>
         <h2 class="card-title">${Pokemon.id}. ${Pokemon.name}</h2>
         <input type="button" value="Click"  onclick="playaudio(${Pokemon.id})">
@@ -35,4 +36,5 @@ var playaudio = id => {
   var audio = document.getElementById("audio" + id);
   audio.play();
 };
+
 getAllPokemons();
