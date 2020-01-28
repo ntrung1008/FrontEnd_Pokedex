@@ -10,6 +10,12 @@
   <body>
     <div>
       <h1>Full Pokedex</h1>
+      <input
+        type="text"
+        id="Input"
+        onkeyup="Filter()"
+        placeholder="Search for Pokemon name"
+      />
       <ul id="pokedex"></ul>
     </div>
     <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>

@@ -36,5 +36,21 @@ var playaudio = id => {
   var audio = document.getElementById("audio" + id);
   audio.play();
 };
+var Filter = () => {
+  var input = document.getElementById("Input");
+  input = input.value.toUpperCase();
 
+  var list = document.getElementById("pokedex");
+  var list_element = document.getElementsByTagName("li");
+
+  for (var i = 0; i < list_element.length; ++i) {
+    a = list_element[i].getElementsByTagName("h2")[0];
+    txtValue = a.textContent || a.innerText;
+    if (txtValue.toUpperCase().indexOf(input) > -1) {
+      list_element[i].style.display = "";
+    } else {
+      list_element[i].style.display = "none";
+    }
+  }
+};
 getAllPokemons();

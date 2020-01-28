@@ -31,3 +31,8 @@ button {
 .card:hover > .default {
   display: none;
 }
+
+html,
+body {
+  cursor: url("../masterball.png"), default;
+}
