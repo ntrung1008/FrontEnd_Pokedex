@@ -55,4 +55,15 @@ button {
 #volume_logo {
   width: 20px;
   height: 20px;
+
+}
+
+html,
+body {
+  cursor: url("../masterball.png"), default;
+}
+
+#Input {
+  font-size: 30px;
+  width: 100%;
 }
