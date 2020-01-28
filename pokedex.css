@@ -6,6 +6,7 @@
 }
 .card-title {
   background-color: lightgreen;
+  text-transform: capitalize;
 }
 #pokedex {
   display: grid;
@@ -35,4 +36,9 @@ button {
 html,
 body {
   cursor: url("../masterball.png"), default;
+}
+
+#Input {
+  font-size: 30px;
+  width: 100%;
 }
