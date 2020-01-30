@@ -1,3 +1,18 @@
+#navbar {
+  background-color: red;
+  display: flex
+}
+
+#navbar h1 {
+  font-family: 'Courier New', Courier, monospace;
+  outline-color: white;
+  color: black;
+  margin-left: 25px;
+  font-weight: bolder;
+  -webkit-text-stroke-color: white;
+  -webkit-text-stroke-width: 1px;
+}
+
 .card {
   list-style: none;
   background-color: #f4f4f4;
@@ -5,17 +20,21 @@
   text-align: center;
 }
 .card-title {
-  background-color: lightgreen;
-  text-transform: capitalize;
+  font-family: 'Courier New', Courier, monospace;
 }
 #pokedex {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 20px;
   padding-inline-start: 0;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 body {
-  background-color: red;
+  background-color: lightgray;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
 }
 button {
   width: 100px;
@@ -31,6 +50,12 @@ button {
 }
 .card:hover > .default {
   display: none;
+}
+
+#volume_logo {
+  width: 20px;
+  height: 20px;
+
 }
 
 html,

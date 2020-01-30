@@ -6,7 +6,6 @@ var getAllPokemons = () => {
     P.getPokemonByName(i) // with Promise
       .then(function(response) {
         //console.log(response);
-
         const Pokemon = {
           name: response.name,
           default: response.sprites["front_default"],
@@ -24,8 +23,8 @@ var displayPokemon = Pokemon => {
     <li class="card">
         <img class="card-image default" src="${Pokemon.display}" >
         <img class="card-image shiny" src="${Pokemon.shiny}"/>
-        <h2 class="card-title">${Pokemon.id}. ${Pokemon.name}</h2>
-        <input type="button" value="Click"  onclick="playaudio(${Pokemon.id})">
+        <h2 class="card-title">${Pokemon.name}</h2>
+        <img id="volume_logo" src="/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
         <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
     </li>
     `;
