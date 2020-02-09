@@ -67,3 +67,22 @@ body {
   font-size: 30px;
   width: 100%;
 }
+
+/*Start Pop up Style */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  margin:autp;
+  display:flex;
+  justify-content: center;
+  align-items:center;
+}
+
+#CloseButton{
+  position:absolute;
+  margin:auto;
+  top:350px;
+  background-color: wheat;
+}
+/*End Pop up Style */
