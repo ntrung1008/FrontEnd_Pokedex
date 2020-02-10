@@ -13,15 +13,90 @@
   -webkit-text-stroke-width: 1px;
 }
 
-.card {
-  list-style: none;
-  background-color: #f4f4f4;
-  color: #222;
-  text-align: center;
+.card-flip {
+  position: relative;
+  height: 500px;
+  width: auto;
+  border-radius: 16%;
 }
+
+.card-flip > div {
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 10%;
+}
+
+.info {
+  display: flex;
+}
+
+.card-back .info-column {
+  display: flex;
+  height: auto;
+}
+
+.card-back .info-column > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-back .info-column > .info-label-column > p {
+  background-color: lightgray;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 10%;
+
+}
+
+.card-back .img-row {
+  display: flex;
+  justify-content: center;
+}
+
+.card-back .img-row img{
+  width: 30%;
+  height: auto;
+}
+
+.card-front {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  backface-visibility: hidden;
+  transform: perspective(0) rotateY(0deg);
+  transition: transform 0.55s linear
+}
+
+.card-back {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: black;
+  backface-visibility: hidden;
+  transform: perspective(0) rotateY(180deg);
+  transition: transform 0.55s linear
+}
+
+.card-flip:hover .card-front {
+  transform: perspective(1000px) rotateY(-180deg)
+}
+
+.card-flip:hover .card-back {
+  transform: perspective(1000px) rotateY(0deg)
+}
+
 .card-title {
   font-family: 'Courier New', Courier, monospace;
 }
+
+
+
 #pokedex {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
