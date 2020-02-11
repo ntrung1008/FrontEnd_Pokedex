@@ -1,5 +1,5 @@
 #navbar {
-  background-color: red;
+  background-color: #cc0000;
   display: flex
 }
 
@@ -13,11 +13,18 @@
   -webkit-text-stroke-width: 1px;
 }
 
+#pokedex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
 .card-flip {
   position: relative;
   height: 500px;
-  width: auto;
+  width: 500px;
   border-radius: 16%;
+  margin: 10px;
 }
 
 .card-flip > div {
@@ -70,6 +77,11 @@
   transition: transform 0.55s linear
 }
 
+.card-front > img {
+  width: 50%;
+  height: auto;
+}
+
 .card-back {
   display: flex;
   flex-direction: column;
@@ -97,14 +109,7 @@
 
 
 
-#pokedex {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: 20px;
-  padding-inline-start: 0;
-  margin-right: 20px;
-  margin-left: 20px;
-}
+
 body {
   background-color: lightgray;
   margin-top: 0px;
