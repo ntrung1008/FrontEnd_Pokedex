@@ -1,5 +1,5 @@
 #navbar {
-  background-color: red;
+  background-color: #cc0000;
   display: flex
 }
 
@@ -13,23 +13,107 @@
   -webkit-text-stroke-width: 1px;
 }
 
-.card {
-  list-style: none;
-  background-color: #f4f4f4;
-  color: #222;
-  text-align: center;
+#pokedex {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 }
+
+.card-flip {
+  position: relative;
+  height: 520px;
+  width: 500px;
+  border-radius: 16%;
+  margin: 10px;
+}
+
+.card-flip > div {
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  border-radius: 10%;
+}
+
+.info {
+  display: flex;
+}
+
+.card-back .info-column {
+  display: flex;
+  height: auto;
+  margin: 10px;
+}
+
+.card-back .info-column > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-back .info-column > .info-label-column > p {
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 10%;
+  font-weight: bolder;
+}
+
+.card-back .info-column > .info-data-column > p {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.card-back .img-row {
+  display: flex;
+  justify-content: center;
+}
+
+.card-back .img-row img{
+  width: 30%;
+  height: auto;
+}
+
+.card-front {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  backface-visibility: hidden;
+  transform: perspective(0) rotateY(0deg);
+  transition: transform 0.55s linear
+}
+
+.card-front > img {
+  width: 50%;
+  height: auto;
+}
+
+.card-back {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  color: black;
+  backface-visibility: hidden;
+  transform: perspective(0) rotateY(180deg);
+  transition: transform 0.55s linear
+}
+
+.card-flip:hover .card-front {
+  transform: perspective(1000px) rotateY(-180deg)
+}
+
+.card-flip:hover .card-back {
+  transform: perspective(1000px) rotateY(0deg)
+}
+
 .card-title {
   font-family: 'Courier New', Courier, monospace;
 }
-#pokedex {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  grid-gap: 20px;
-  padding-inline-start: 0;
-  margin-right: 20px;
-  margin-left: 20px;
-}
+
+
+
+
 body {
   background-color: lightgray;
   margin-top: 0px;
