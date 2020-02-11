@@ -41,6 +41,7 @@
 .card-back .info-column {
   display: flex;
   height: auto;
+  margin: 10px;
 }
 
 .card-back .info-column > div {
@@ -49,10 +50,13 @@
 }
 
 .card-back .info-column > .info-label-column > p {
-  background-color: lightgray;
   font-family: 'Courier New', Courier, monospace;
   border-radius: 10%;
+  font-weight: bolder;
+}
 
+.card-back .info-column > .info-data-column > p {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 .card-back .img-row {
