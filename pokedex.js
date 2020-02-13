@@ -13,7 +13,7 @@ var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
       .then(function(response) {
-        //console.log(response);
+        console.log(response);
         const Pokemon = {
           name: response.name.replace("-", " "),
           default: response.sprites["front_default"],
@@ -60,7 +60,7 @@ var displayPokemon = Pokemon => {
               <p>Type:</p>
               <p>Abilities:</p>
               <p>Speed:</p>
-              <p>Special Defense:</p>
+              <p>S-Defense:</p>
             </div>
             <div class="info-data-column">
               <p>${Pokemon.height}</p>
@@ -73,7 +73,7 @@ var displayPokemon = Pokemon => {
           </div>
           <div class="info-column">
             <div class="info-label-column">
-              <p>Special Attack:</p>
+              <p>S-Attack:</p>
               <p>Defense:</p>
               <p>Attack:</p>
               <p>Hp:</p>
@@ -181,7 +181,7 @@ var PopUpInfo = Pokemon => {
     </div>
   </div>
     `;
-  pokedex.innerHTML = pokemonHTMLString + pokedex.innerHTML;
+  pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
 };
 
 var Close = () => {
