@@ -87,7 +87,7 @@ var displayPokemon = Pokemon => {
           </div>
         </div>
         <div class="audio-buttons">
-          <img id="volume_logo" src="../resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
+          <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
           <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
         </div> 
       </div>
