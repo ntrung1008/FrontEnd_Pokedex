@@ -1,6 +1,6 @@
-const pokedex = document.getElementById("pokedex");
-const P = new Pokedex.Pokedex();
-const Poke_cache = [];
+var pokedex = document.getElementById("pokedex");
+var P = new Pokedex.Pokedex();
+var Poke_cache = [];
 var maximum = 1;
 
 var display20Poke = () => {
@@ -13,7 +13,7 @@ var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
       .then(function(response) {
-        console.log(response);
+        //console.log(response);
         const Pokemon = {
           name: response.name.replace("-", " "),
           default: response.sprites["front_default"],
