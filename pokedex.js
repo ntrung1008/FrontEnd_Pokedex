@@ -15,7 +15,7 @@ var getAllPokemons = input => {
       .then(function(response) {
         //console.log(response);
         const Pokemon = {
-          name: response.name,
+          name: response.name.replace("-", " "),
           default: response.sprites["front_default"],
           shiny: response.sprites["front_shiny"],
           display: response.sprites["front_default"],

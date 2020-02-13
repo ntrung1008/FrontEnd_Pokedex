@@ -109,6 +109,7 @@
 
 .card-title {
   font-family: "Courier New", Courier, monospace;
+  text-transform: capitalize;
 }
 
 body {
@@ -136,11 +137,6 @@ button {
 #volume_logo {
   width: 20px;
   height: 20px;
-}
-
-html,
-body {
-  cursor: url("../masterball.png"), default;
 }
 
 #Input {
