@@ -3,10 +3,8 @@ var P = new Pokedex.Pokedex();
 
 var search = () => {
   //remove previous element if exist
-  var remove = document.getElementById("move-card");
-  if (remove != null) {
-    remove.parentNode.removeChild(remove);
-  }
+  var remove = document.getElementById("move_display");
+  remove.innerHTML = "";
 
   //
 
