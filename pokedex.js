@@ -44,8 +44,6 @@ var displayPokemon = Pokemon => {
       <div class="card-front">
         <img class="card-image default" src="${Pokemon.display}"  >
         <h2 class="card-title" onclick ="getinfo(${Pokemon.id})" >${Pokemon.name} </h2>
-        <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
-        <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
       </div>
       <div class="card-back">
         <div class="img-row">
