@@ -1,29 +1,37 @@
-const pokedex = document.getElementById("pokedex");
-const P = new Pokedex.Pokedex();
-const Poke_cache =[];
+var pokedex = document.getElementById("pokedex");
+var P = new Pokedex.Pokedex();
+var Poke_cache = [];
+var maximum = 1;
 
-var getAllPokemons = () => {
-  for (let i = 1; i <= 807; ++i) {
+var display20Poke = () => {
+  getAllPokemons(maximum);
+  maximum += 200;
+  console.log(maximum);
+};
+
+var getAllPokemons = input => {
+  for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
       .then(function(response) {
         //console.log(response);
         const Pokemon = {
-          name: response.name,
+          id: response.id,
+          name: response.name.replace("-", " "),
           default: response.sprites["front_default"],
           shiny: response.sprites["front_shiny"],
-          back_default: response.sprites["back_default"],
-          back_shiny: response.sprites["back_shiny"],
           display: response.sprites["front_default"],
-          type :response.types.map((type)=>type.type.name).join(','),
-          height:response.height,
-          weight:response.weight,
-          ability:response.abilities.map((ability)=>ability.ability.name).join(','),
-          speed:response.stats[0].base_stat,
-          special_defense:response.stats[1].base_stat,
-          special_attack:response.stats[2].base_stat,
-          defense:response.stats[3].base_stat,
-          attack:response.stats[4].base_stat,
-          hp:response.stats[5].base_stat,
+          type: response.types.map(type => type.type.name).join(","),
+          height: response.height,
+          weight: response.weight,
+          ability: response.abilities
+            .map(ability => ability.ability.name)
+            .join(","),
+          speed: response.stats[0].base_stat,
+          special_defense: response.stats[1].base_stat,
+          special_attack: response.stats[2].base_stat,
+          defense: response.stats[3].base_stat,
+          attack: response.stats[4].base_stat,
+          hp: response.stats[5].base_stat
         };
         displayPokemon(Pokemon);
       });
@@ -36,16 +44,11 @@ var displayPokemon = Pokemon => {
       <div class="card-front">
         <img class="card-image default" src="${Pokemon.display}"  >
         <h2 class="card-title" onclick ="getinfo(${Pokemon.id})" >${Pokemon.name} </h2>
-        <img id="volume_logo" src="/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
-        <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
       </div>
-
       <div class="card-back">
         <div class="img-row">
           <img class="card-image " src="${Pokemon.default}">
-          <img class="card-image " src="${Pokemon.back_default}">
           <img class="card-image " src="${Pokemon.shiny}"/>
-          <img class="card-image " src="${Pokemon.back_shiny}"/>
         </div>
         <h2 class="card-title"  >${Pokemon.name} </h2>
         <div class="info">
@@ -56,7 +59,7 @@ var displayPokemon = Pokemon => {
               <p>Type:</p>
               <p>Abilities:</p>
               <p>Speed:</p>
-              <p>Special Defense:</p>
+              <p>S-Defense:</p>
             </div>
             <div class="info-data-column">
               <p>${Pokemon.height}</p>
@@ -69,7 +72,7 @@ var displayPokemon = Pokemon => {
           </div>
           <div class="info-column">
             <div class="info-label-column">
-              <p>Special Attack:</p>
+              <p>S-Attack:</p>
               <p>Defense:</p>
               <p>Attack:</p>
               <p>Hp:</p>
@@ -83,7 +86,7 @@ var displayPokemon = Pokemon => {
           </div>
         </div>
         <div class="audio-buttons">
-          <img id="volume_logo" src="../resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
+          <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
           <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
         </div> 
       </div>
@@ -116,44 +119,42 @@ var Filter = () => {
   }
 };
 
-
 //PopUp Feature
-var getinfo =(id)=>
-{
-  if(!Poke_cache[id])
-  {
+var getinfo = id => {
+  if (!Poke_cache[id]) {
     P.getPokemonByName(id) // with Promise
-    .then(function(response) {
-      //console.log(response);
-      var Pokemon = {
-        name: response.name,
-        default: response.sprites["front_default"],
-        shiny: response.sprites["front_shiny"],
-        back_default: response.sprites["back_default"],
-        back_shiny: response.sprites["back_shiny"],
-        display: response.sprites["front_default"],
-        type :response.types.map((type)=>type.type.name).join(','),
-        height:response.height,
-        weight:response.weight,
-        ability:response.abilities.map((ability)=>ability.ability.name).join(','),
-        speed:response.stats[0].base_stat,
-        special_defense:response.stats[1].base_stat,
-        special_attack:response.stats[2].base_stat,
-        defense:response.stats[3].base_stat,
-        attack:response.stats[4].base_stat,
-        hp:response.stats[5].base_stat,
-      };
-      Poke_cache[id]= Pokemon;
-      PopUpInfo(Pokemon);
-  });
-  }
-  else{
+      .then(function(response) {
+        //console.log(response);
+        var Pokemon = {
+          id: response.id,
+          name: response.name,
+          default: response.sprites["front_default"],
+          shiny: response.sprites["front_shiny"],
+          back_default: response.sprites["back_default"],
+          back_shiny: response.sprites["back_shiny"],
+          display: response.sprites["front_default"],
+          type: response.types.map(type => type.type.name).join(","),
+          height: response.height,
+          weight: response.weight,
+          ability: response.abilities
+            .map(ability => ability.ability.name)
+            .join(","),
+          speed: response.stats[0].base_stat,
+          special_defense: response.stats[1].base_stat,
+          special_attack: response.stats[2].base_stat,
+          defense: response.stats[3].base_stat,
+          attack: response.stats[4].base_stat,
+          hp: response.stats[5].base_stat
+        };
+        Poke_cache[id] = Pokemon;
+        PopUpInfo(Pokemon);
+      });
+  } else {
     PopUpInfo(Poke_cache[id]);
   }
-}
+};
 
-var PopUpInfo= (Pokemon)=>
-{
+var PopUpInfo = Pokemon => {
   var pokemonHTMLString = `
   <div class ="popup" >
     <button id="CloseButton" onclick ="Close()">Close</button>
@@ -180,16 +181,13 @@ var PopUpInfo= (Pokemon)=>
     </div>
   </div>
     `;
-  pokedex.innerHTML= pokemonHTMLString+pokedex.innerHTML;
-}
+  pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
+};
 
-var Close = ()=>{
-   var remove = document.querySelector(".popup");
-   remove.parentElement.removeChild(remove);
-}
+var Close = () => {
+  var remove = document.querySelector(".popup");
+  remove.parentElement.removeChild(remove);
+};
 
-
-
-
-
-getAllPokemons();
+//getAllPokemons();
+display20Poke();

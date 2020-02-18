@@ -8,11 +8,13 @@
     <title>Full Pokedex</title>
   </head>
   <div id="navbar">
-    <img src="/resources/Pokedex.png">
+    <img src="../FrontEnd_Pokedex/resources/Pokedex.png" />
   </div>
   <body>
     <div>
       <h1>Full Pokedex</h1>
+      <a href="move_search.html">Moves</a>.
+      <a href="region.html">Regions</a>.
       <input
         type="text"
         id="Input"
@@ -22,14 +24,30 @@
       <div id="pokedex"></div>
       <!--<ul id="pokedex"></ul>-->
     </div>
+    <footer>
+      <button class="loadmore" onclick="display20Poke()">
+        Load more Pokemons
+      </button>
+    </footer>
     <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="pokedex.js"></script>
 
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Load our React component. -->
+    <!-- Load our React component. -->
     <script src="pokedex_react.js"></script>
   </body>
 </html>
