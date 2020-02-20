@@ -131,42 +131,42 @@ var displayPokemon = Pokemon => {
     });
 
   //Getting additional moves
-  for (var m = 0; m < Pokemon.moves.length; m++) {
-    P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
-      const Move = {
-        name: response.name.replace("-", " "),
-        power: response.power,
-        accuracy: response.accuracy,
-        pp: response.pp,
-        type: response.damage_class.name,
-        damage_type: response.type.name,
-        effect: response.effect_entries[0].effect,
-        effect_chance: response.effect_chance,
-        description: response.flavor_text_entries[2].flavor_text
-      };
-      if (Move.power == null) {
-        Move.power = 0;
-      }
-      if (Move.accuracy == null) {
-        Move.power = 0;
-      }
-      Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
-      Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
-      var move_display = document.getElementById("extra-info" + Pokemon.id);
-      var MoveHTMLString = `
-      <div id ="move-card" class="card" >
-          <h2 class="card-title"  >${Move.name} </h2>
-          <p>Power: ${Move.power}</p>
-          <p>Accuracy: ${Move.accuracy}</p>
-          <p>PP: ${Move.pp}</p>
-          <p>Type: ${Move.type}</p>
-          <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
-      </div>
-      `;
-      move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
-    });
-  }
-};
+//   for (var m = 0; m < Pokemon.moves.length; m++) {
+//     P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
+//       const Move = {
+//         name: response.name.replace("-", " "),
+//         power: response.power,
+//         accuracy: response.accuracy,
+//         pp: response.pp,
+//         type: response.damage_class.name,
+//         damage_type: response.type.name,
+//         effect: response.effect_entries[0].effect,
+//         effect_chance: response.effect_chance,
+//         description: response.flavor_text_entries[2].flavor_text
+//       };
+//       if (Move.power == null) {
+//         Move.power = 0;
+//       }
+//       if (Move.accuracy == null) {
+//         Move.power = 0;
+//       }
+//       Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
+//       Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
+//       var move_display = document.getElementById("extra-info" + Pokemon.id);
+//       var MoveHTMLString = `
+//       <div id ="move-card" class="card" >
+//           <h2 class="card-title"  >${Move.name} </h2>
+//           <p>Power: ${Move.power}</p>
+//           <p>Accuracy: ${Move.accuracy}</p>
+//           <p>PP: ${Move.pp}</p>
+//           <p>Type: ${Move.type}</p>
+//           <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
+//       </div>
+//       `;
+//       move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
+//     });
+//   }
+   };
 
 var playaudio = id => {
   var audio = document.getElementById("audio" + id);

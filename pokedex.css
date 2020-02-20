@@ -25,6 +25,7 @@
   width: 500px;
   border-radius: 16%;
   margin: 10px;
+  display: flex;
 }
 
 .card-flip > div {
@@ -97,6 +98,12 @@
   backface-visibility: hidden;
   transform: perspective(0) rotateY(180deg);
   transition: transform 0.55s linear;
+  overflow-y: auto;
+}
+
+.card-back > div {
+  min-height: 0;
+  margin: 10px;
 }
 
 .card-flip:hover .card-front {
