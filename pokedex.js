@@ -51,7 +51,7 @@ var displayPokemon = Pokemon => {
           <img class="card-image " src="${Pokemon.default}">
           <img class="card-image " src="${Pokemon.shiny}"/>
         </div>
-        <h2 class="card-title"  >${Pokemon.name} </h2>
+        <h2 class="card-title">${Pokemon.name} </h2>
         <div class="info">
           <div class="info-column">
             <div class="info-label-column">
@@ -60,15 +60,13 @@ var displayPokemon = Pokemon => {
               <p>Type:</p>
               <p>Abilities:</p>
               <p>Speed:</p>
-              <p>S-Defense:</p>
             </div>
             <div class="info-data-column">
               <p>${Pokemon.height}</p>
               <p>${Pokemon.weight}</p>
+              <p>${Pokemon.speed}</p>
               <p>${Pokemon.type}</p>
               <p>${Pokemon.ability}</p>
-              <p>${Pokemon.speed}</p>
-              <p>${Pokemon.special_defense}</p>
             </div>
           </div>
           <div class="info-column">
@@ -77,16 +75,20 @@ var displayPokemon = Pokemon => {
               <p>Defense:</p>
               <p>Attack:</p>
               <p>Hp:</p>
+              <p>S-Defense:</p>
             </div>
             <div class="info-data-column">
               <p>${Pokemon.special_attack}</p>
               <p>${Pokemon.defense}</p>
               <p>${Pokemon.attack}</p>
               <p>${Pokemon.hp}</p>
+              <p>${Pokemon.special_defense}</p>
             </div>
           </div>
         </div>
-        <div id = "extra-info${Pokemon.id}">
+        <div class="varieties">
+          <h3 id="variety-title">Varieties</h3>  
+          <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
         </div>
         <div class="audio-buttons">
           <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
@@ -112,11 +114,13 @@ var displayPokemon = Pokemon => {
                 name: response.name.replace("-", " ")
               };
               var VarietyHTMLString = `
-            <p id="variety-name"> 
-              ${PokemonVariety.name}
-            </p>
-            <img id="variety-pic" src ="${PokemonVariety.sprite}"> 
-            `;
+                <div class="variety">
+                  <p id="variety-name"> 
+                    ${PokemonVariety.name}
+                  </p>
+                  <img id="variety-pic" src ="${PokemonVariety.sprite}"> 
+                </div>
+                `;
               var variety_display = document.getElementById(
                 "extra-info" + Pokemon.id
               );
