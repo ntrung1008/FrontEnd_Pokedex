@@ -168,3 +168,8 @@ button {
   margin: auto;
   width: 100%;
 }
+
+.damage_type_icon {
+  width: 1%;
+  height: auto;
+}
