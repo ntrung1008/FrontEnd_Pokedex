@@ -13,7 +13,6 @@ var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
       .then(function(response) {
-        //console.log(response);
         const Pokemon = {
           id: response.id,
           name: response.name.replace("-", " "),
@@ -31,7 +30,9 @@ var getAllPokemons = input => {
           special_attack: response.stats[2].base_stat,
           defense: response.stats[3].base_stat,
           attack: response.stats[4].base_stat,
-          hp: response.stats[5].base_stat
+          hp: response.stats[5].base_stat,
+          species: response.species.name,
+          moves: response.moves
         };
         displayPokemon(Pokemon);
       });
@@ -85,6 +86,8 @@ var displayPokemon = Pokemon => {
             </div>
           </div>
         </div>
+        <div id = "extra-info${Pokemon.id}">
+        </div>
         <div class="audio-buttons">
           <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
           <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
@@ -93,6 +96,76 @@ var displayPokemon = Pokemon => {
     </div>
     `;
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
+
+  //Getting additional form
+  P.getPokemonSpeciesByName(Pokemon.species) // with Promise
+    .then(function(response) {
+      const PokemonSpecies = {
+        varieties: response.varieties
+      };
+      for (var k = 0; k < PokemonSpecies.varieties.length; k++) {
+        if (k > 0) {
+          P.getPokemonByName(PokemonSpecies.varieties[k].pokemon.name).then(
+            function(response) {
+              const PokemonVariety = {
+                sprite: response.sprites.front_default,
+                name: response.name.replace("-", " ")
+              };
+              var VarietyHTMLString = `
+            <p id="variety-name"> 
+              ${PokemonVariety.name}
+            </p>
+            <img id="variety-pic" src ="${PokemonVariety.sprite}"> 
+            `;
+              var variety_display = document.getElementById(
+                "extra-info" + Pokemon.id
+              );
+              variety_display.insertAdjacentHTML(
+                "beforeend",
+                VarietyHTMLString
+              );
+            }
+          );
+        }
+      }
+    });
+
+  //Getting additional moves
+  for (var m = 0; m < Pokemon.moves.length; m++) {
+    P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
+      const Move = {
+        name: response.name.replace("-", " "),
+        power: response.power,
+        accuracy: response.accuracy,
+        pp: response.pp,
+        type: response.damage_class.name,
+        damage_type: response.type.name,
+        effect: response.effect_entries[0].effect,
+        effect_chance: response.effect_chance,
+        description: response.flavor_text_entries[2].flavor_text
+      };
+      if (Move.power == null) {
+        Move.power = 0;
+      }
+      if (Move.accuracy == null) {
+        Move.power = 0;
+      }
+      Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
+      Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
+      var move_display = document.getElementById("extra-info" + Pokemon.id);
+      var MoveHTMLString = `
+      <div id ="move-card" class="card" >
+          <h2 class="card-title"  >${Move.name} </h2>
+          <p>Power: ${Move.power}</p>
+          <p>Accuracy: ${Move.accuracy}</p>
+          <p>PP: ${Move.pp}</p>
+          <p>Type: ${Move.type}</p>
+          <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
+      </div>
+      `;
+      move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
+    });
+  }
 };
 
 var playaudio = id => {
