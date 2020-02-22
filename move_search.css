@@ -2,3 +2,7 @@
   width: 5%;
   height: auto;
 }
+
+body {
+  background-color: lightgray;
+}
