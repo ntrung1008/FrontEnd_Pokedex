@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="move_search.css" />
+    <link rel="stylesheet" href="navbar.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -13,10 +14,23 @@
     />
     <title>Full Pokedex</title>
   </head>
-  <div id="navbar">
-    <img src="../FrontEnd_Pokedex/resources/Pokedex.png" />
-  </div>
   <body>
+    <div id="navbar">
+      <div class="nav-logo">
+        <img src="resources/Pokedex.png" alt="Pokedex"/>
+      </div>
+      <div class="navbar-buttons">
+        <div class="nav-button">
+          <a href="index.html">Pokemon</a>
+        </div>
+        <div class="nav-button" id="currentPage">
+          <a href="move_search.html">Moves</a>
+        </div>
+        <div class="nav-button">
+          <a href="region.html">Regions</a>
+        </div>
+      </div>
+    </div>
     <input id="input" type="text" placeholder="Search.." />
     <select id="categories">
       <option id="c_name" value="name">Moves name</option>

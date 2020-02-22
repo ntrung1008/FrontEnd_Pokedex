@@ -51,7 +51,7 @@ var displayPokemon = Pokemon => {
           <img class="card-image " src="${Pokemon.default}">
           <img class="card-image " src="${Pokemon.shiny}"/>
         </div>
-        <h2 class="card-title"  >${Pokemon.name} </h2>
+        <h2 class="card-title">${Pokemon.name} </h2>
         <div class="info">
           <div class="info-column">
             <div class="info-label-column">
@@ -60,15 +60,13 @@ var displayPokemon = Pokemon => {
               <p>Type:</p>
               <p>Abilities:</p>
               <p>Speed:</p>
-              <p>S-Defense:</p>
             </div>
             <div class="info-data-column">
               <p>${Pokemon.height}</p>
               <p>${Pokemon.weight}</p>
+              <p>${Pokemon.speed}</p>
               <p>${Pokemon.type}</p>
               <p>${Pokemon.ability}</p>
-              <p>${Pokemon.speed}</p>
-              <p>${Pokemon.special_defense}</p>
             </div>
           </div>
           <div class="info-column">
@@ -77,16 +75,20 @@ var displayPokemon = Pokemon => {
               <p>Defense:</p>
               <p>Attack:</p>
               <p>Hp:</p>
+              <p>S-Defense:</p>
             </div>
             <div class="info-data-column">
               <p>${Pokemon.special_attack}</p>
               <p>${Pokemon.defense}</p>
               <p>${Pokemon.attack}</p>
               <p>${Pokemon.hp}</p>
+              <p>${Pokemon.special_defense}</p>
             </div>
           </div>
         </div>
-        <div id = "extra-info${Pokemon.id}">
+        <div class="varieties">
+          <h3 id="variety-title">Varieties</h3>  
+          <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
         </div>
         <div class="audio-buttons">
           <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
@@ -112,11 +114,13 @@ var displayPokemon = Pokemon => {
                 name: response.name.replace("-", " ")
               };
               var VarietyHTMLString = `
-            <p id="variety-name"> 
-              ${PokemonVariety.name}
-            </p>
-            <img id="variety-pic" src ="${PokemonVariety.sprite}"> 
-            `;
+                <div class="variety">
+                  <p id="variety-name"> 
+                    ${PokemonVariety.name}
+                  </p>
+                  <img id="variety-pic" src ="${PokemonVariety.sprite}"> 
+                </div>
+                `;
               var variety_display = document.getElementById(
                 "extra-info" + Pokemon.id
               );
@@ -131,42 +135,42 @@ var displayPokemon = Pokemon => {
     });
 
   //Getting additional moves
-  for (var m = 0; m < Pokemon.moves.length; m++) {
-    P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
-      const Move = {
-        name: response.name.replace("-", " "),
-        power: response.power,
-        accuracy: response.accuracy,
-        pp: response.pp,
-        type: response.damage_class.name,
-        damage_type: response.type.name,
-        effect: response.effect_entries[0].effect,
-        effect_chance: response.effect_chance,
-        description: response.flavor_text_entries[2].flavor_text
-      };
-      if (Move.power == null) {
-        Move.power = 0;
-      }
-      if (Move.accuracy == null) {
-        Move.power = 0;
-      }
-      Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
-      Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
-      var move_display = document.getElementById("extra-info" + Pokemon.id);
-      var MoveHTMLString = `
-      <div id ="move-card" class="card" >
-          <h2 class="card-title"  >${Move.name} </h2>
-          <p>Power: ${Move.power}</p>
-          <p>Accuracy: ${Move.accuracy}</p>
-          <p>PP: ${Move.pp}</p>
-          <p>Type: ${Move.type}</p>
-          <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
-      </div>
-      `;
-      move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
-    });
-  }
-};
+//   for (var m = 0; m < Pokemon.moves.length; m++) {
+//     P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
+//       const Move = {
+//         name: response.name.replace("-", " "),
+//         power: response.power,
+//         accuracy: response.accuracy,
+//         pp: response.pp,
+//         type: response.damage_class.name,
+//         damage_type: response.type.name,
+//         effect: response.effect_entries[0].effect,
+//         effect_chance: response.effect_chance,
+//         description: response.flavor_text_entries[2].flavor_text
+//       };
+//       if (Move.power == null) {
+//         Move.power = 0;
+//       }
+//       if (Move.accuracy == null) {
+//         Move.power = 0;
+//       }
+//       Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
+//       Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
+//       var move_display = document.getElementById("extra-info" + Pokemon.id);
+//       var MoveHTMLString = `
+//       <div id ="move-card" class="card" >
+//           <h2 class="card-title"  >${Move.name} </h2>
+//           <p>Power: ${Move.power}</p>
+//           <p>Accuracy: ${Move.accuracy}</p>
+//           <p>PP: ${Move.pp}</p>
+//           <p>Type: ${Move.type}</p>
+//           <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
+//       </div>
+//       `;
+//       move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
+//     });
+//   }
+   };
 
 var playaudio = id => {
   var audio = document.getElementById("audio" + id);

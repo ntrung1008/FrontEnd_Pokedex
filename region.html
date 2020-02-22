@@ -6,12 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="region.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="navbar.css" />
     <title>Full Pokedex</title>
   </head>
-  <div id="navbar">
-    <img src="../FrontEnd_Pokedex/resources/Pokedex.png" />
-  </div>
   <body>
+    <div id="navbar">
+      <div class="nav-logo">
+        <img src="resources/Pokedex.png" alt="Pokedex"/>
+      </div>
+      <div class="navbar-buttons">
+        <div class="nav-button">
+          <a href="index.html">Pokemon</a>
+        </div>
+        <div class="nav-button">
+          <a href="move_search.html">Moves</a>
+        </div>
+        <div class="nav-button" id="currentPage">
+          <a href="region.html">Regions</a>
+        </div>
+      </div>
+    </div>
     <h1>Select a region you want to visit</h1>
     <select  id="regions" >
       <option id= "r_name" value= "kanto">Kanto( Gen-1)</option>
