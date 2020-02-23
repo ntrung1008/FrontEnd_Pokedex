@@ -16,87 +16,102 @@
   justify-content: center;
 }
 
-.card-flip {
+.flip-card {
+  width:45%;
+  height: 400px;
   position: relative;
-  height: 520px;
-  width: 500px;
-  border-radius: 16%;
-  margin: 10px;
-  display: flex;
+  text-align: center;
+  color: #3b3b3b;
+  font-size: 45px;
+  cursor: pointer;
+  background: lightgray;
+  margin: 2%;
 }
 
-.card-flip > div {
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  border-radius: 10%;
-}
-
-.info {
-  display: flex;
-  padding-bottom: 100px;
-}
-
-.card-back .info-column {
-  display: flex;
-  height: auto;
-  margin: 10px;
-}
-
-.card-back .info-column > div {
-  display: flex;
-  flex-direction: column;
-}
-
-.card-back .info-column > .info-label-column > p {
-  font-family: "Courier New", Courier, monospace;
-  border-radius: 10%;
-  font-weight: bolder;
-}
-
-.card-back .info-column > .info-data-column > p {
-  font-family: "Courier New", Courier, monospace;
-}
-
-.card-back .img-row {
-  display: flex;
-  justify-content: center;
-}
-
-.card-back .img-row img {
-  width: 30%;
-  height: auto;
-}
-
-.card-front {
-  display: flex;
-  flex-direction: column;
+.flip-card .card-front {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: white;
   backface-visibility: hidden;
-  transform: perspective(0) rotateY(0deg);
+  transform: perspective(500px) rotateY(0deg);
   transition: transform 0.55s linear;
+  display: flex;
+  flex-direction: column;
+  font-size: x-large;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+  align-items: center;
+  text-transform: capitalize;
+  background-color: white;
+  border-radius: 5%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.card-front > img {
-  width: 50%;
+.flip-card .card-front img {
+  width: 9em;
   height: auto;
 }
 
-.card-back {
-  display: flex;
-  flex-direction: column;
+.flip-card .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: white;
-  color: black;
   backface-visibility: hidden;
-  transform: perspective(0) rotateY(180deg);
+  transform: perspective(500px) rotateY(180deg);
   transition: transform 0.55s linear;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: 2%;
+  margin-right: 2%;
+  border-radius: 5%;
+}
+
+.card-back .info {
+  font-size: medium;
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
+}
+
+.card-back .info tr:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.card-back .info-labels {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-back .info-values {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.section-title {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: x-large;
+  font-weight: bolder;
+  margin-top: 10%;
+  background-color: #2a75bb;
+  color: white;
+}
+
+.flip-card:hover .card-front {
+  transform: perspective(500px) rotateY(-180deg)
+}
+
+.flip-card:hover .card-back {
+   transform: perspective(500px) rotateY(0deg)
+}
+
+.img-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 #variety-title {
@@ -119,32 +134,39 @@
 .varieties {
   display: flex;
   flex-direction: column;
-  margin-top: 30px;
+  margin-top: 10px;
   align-items: center;
 }
 
-.card-back div {
-  min-height: 0;
-  margin: auto;
-}
-
 .extra-info {
-  margin-top: 20px;
+  margin: 5%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.card-flip:hover .card-front {
-  transform: perspective(1000px) rotateY(-180deg);
+.variety-name {
+  margin: 20%;
+  font-size: medium;
+  font-family: 'Courier New', Courier, monospace;
 }
 
-.card-flip:hover .card-back {
-  transform: perspective(1000px) rotateY(0deg);
+.variety-pic {
+  margin: 20%;
+  width: 1em;
+  height: auto;
 }
 
-.card-title {
-  font-family: "Courier New", Courier, monospace;
-  text-transform: capitalize;
+.move-info {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.move-info p {
+  margin: 0;
 }
 
 body {
@@ -208,3 +230,5 @@ button {
   width: 1%;
   height: auto;
 }
+
+

@@ -41,63 +41,63 @@ var getAllPokemons = input => {
 
 var displayPokemon = Pokemon => {
   var pokemonHTMLString = `
-    <div class="card-flip">
+    <div class="flip-card">
       <div class="card-front">
-        <img class="card-image default" src="${Pokemon.display}"  >
-        <h2 class="card-title" onclick ="getinfo(${Pokemon.id})" >${Pokemon.name} </h2>
+        <p class="card-title" onclick ="getinfo(${Pokemon.id})" >${Pokemon.name} </p>
+        <img class="card-image default" src="${Pokemon.display}">
       </div>
       <div class="card-back">
         <div class="img-row">
           <img class="card-image " src="${Pokemon.default}">
           <img class="card-image " src="${Pokemon.shiny}"/>
         </div>
-        <h2 class="card-title">${Pokemon.name} </h2>
-        <div class="info">
-          <div class="info-column">
-            <div class="info-label-column">
-              <p>Height:</p>
-              <p>Weight:</p>
-              <p>Type:</p>
-              <p>Abilities:</p>
-              <p>Speed:</p>
-            </div>
-            <div class="info-data-column">
-              <p>${Pokemon.height}</p>
-              <p>${Pokemon.weight}</p>
-              <p>${Pokemon.speed}</p>
-              <p>${Pokemon.type}</p>
-              <p>${Pokemon.ability}</p>
-            </div>
-          </div>
-          <div class="info-column">
-            <div class="info-label-column">
-              <p>S-Attack:</p>
-              <p>Defense:</p>
-              <p>Attack:</p>
-              <p>Hp:</p>
-              <p>S-Defense:</p>
-            </div>
-            <div class="info-data-column">
-              <p>${Pokemon.special_attack}</p>
-              <p>${Pokemon.defense}</p>
-              <p>${Pokemon.attack}</p>
-              <p>${Pokemon.hp}</p>
-              <p>${Pokemon.special_defense}</p>
-            </div>
-          </div>
-        </div>
-        <div class="varieties">
-          <h3 id="variety-title">Varieties</h3>  
-          <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
-        </div>
         <div class="audio-buttons">
           <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
           <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
         </div> 
+        <div class="section-title">Info</div>
+        <table class="info">
+          <tr>
+            <td>Height</td>
+            <td>${Pokemon.height}</td>
+          </tr>
+          <tr>
+            <td>Weight</td>
+            <td>${Pokemon.weight}</td>
+          </tr>
+          <tr>
+            <td>Type</td>
+            <td>${Pokemon.type}</td>
+          </tr>
+          <tr>
+            <td>Ability</td>
+            <td>${Pokemon.ability}</td>
+          </tr>
+        </table>
+        <div class="section-title">Stats</div>
+        <div class="stat-bars">
+          <div class="bar-label">HP</div>
+          <div class="bar" style="--bar-value:${(Pokemon.hp/200) * 100}%;">${Pokemon.hp}</div>
+          <div class="bar-label">Attack</div>
+          <div class="bar" style="--bar-value:${(Pokemon.attack/200) * 100}%;">${Pokemon.attack}</div>
+          <div class="bar-label">Defense</div>
+          <div class="bar" style="--bar-value:${(Pokemon.defense/200) * 100}%;">${Pokemon.defense}</div>
+          <div class="bar-label">Speed</div>
+          <div class="bar" style="--bar-value:${(Pokemon.speed/200) * 100}%;">${Pokemon.speed}</div>
+          <div class="bar-label">Special Attack</div>
+          <div class="bar" style="--bar-value:${(Pokemon.special_attack/200) * 100}%;">${Pokemon.special_attack}</div>
+          <div class="bar-label">Special Defense</div>
+          <div class="bar" style="--bar-value:${(Pokemon.special_defense/200) * 100}%;">${Pokemon.special_defense}</div>
+        </div>
+        <div class="section-title">Other Forms</div>
+        <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
+        <div class="section-title">Moves</div>
+        <div id="move-info${Pokemon.id}" class="move-info"></div>
       </div>
     </div>
     `;
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
+  var moves = Pokemon.moves;
 
   //Getting additional form
   P.getPokemonSpeciesByName(Pokemon.species) // with Promise
@@ -115,10 +115,10 @@ var displayPokemon = Pokemon => {
               };
               var VarietyHTMLString = `
                 <div class="variety">
-                  <p id="variety-name"> 
+                  <p id="variety-name" class="variety-name"> 
                     ${PokemonVariety.name}
                   </p>
-                  <img id="variety-pic" src ="${PokemonVariety.sprite}"> 
+                  <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}"> 
                 </div>
                 `;
               var variety_display = document.getElementById(
@@ -133,6 +133,14 @@ var displayPokemon = Pokemon => {
         }
       }
     });
+
+    for (var i = 0; i < moves.length; ++i) {
+      var movesElement = document.getElementById("move-info" + Pokemon.id);
+      var MoveHTMLString = `
+        <p>${moves[i].move.name}</p>
+      `;
+      movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
+    }
 
   //Getting additional moves
 //   for (var m = 0; m < Pokemon.moves.length; m++) {
@@ -183,10 +191,10 @@ var Filter = () => {
   input = input.value.toUpperCase();
 
   var list = document.getElementById("pokedex");
-  var list_element = document.getElementsByClassName("card-flip");
+  var list_element = document.getElementsByClassName("flip-card");
 
   for (var i = 0; i < list_element.length; ++i) {
-    a = list_element[i].getElementsByTagName("h2")[0];
+    a = list_element[i].getElementsByClassName("card-title")[0];
     txtValue = a.textContent || a.innerText;
     if (txtValue.toUpperCase().indexOf(input) > -1) {
       list_element[i].style.display = "";
