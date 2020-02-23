@@ -21,13 +21,19 @@
     width: var(--bar-value);
     height: 30px;
     background-color: #2a75bb;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     display: flex;
     justify-content: flex-start;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
     align-items: center;
+    font-weight: bold;
+}
+
+.bar:hover {
+    background-color: lightgray;
+    color: black;
 }
 
 .stats {
