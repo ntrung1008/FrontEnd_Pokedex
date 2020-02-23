@@ -137,7 +137,7 @@ var displayPokemon = Pokemon => {
     for (var i = 0; i < moves.length; ++i) {
       var movesElement = document.getElementById("move-info" + Pokemon.id);
       var MoveHTMLString = `
-        <p>${moves[i].move.name}</p>
+        <p>${moves[i].move.name.replace("-"," ")}</p>
       `;
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
