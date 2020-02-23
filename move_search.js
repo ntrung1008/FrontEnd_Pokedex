@@ -64,15 +64,38 @@ var search = () => {
 
 var displayMove = Move => {
   var MoveHTMLString = `
-      <div id ="move-card" class="card" >
+      <div id ="move-card" class="card">
           <h2 class="card-title"  >${Move.name} </h2>
-          <p>Power: ${Move.power}</p>
-          <p>Accuracy: ${Move.accuracy}</p>
-          <p>PP: ${Move.pp}</p>
-          <p>Type: ${Move.type}</p>
-          <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
-          <p>Effect: ${Move.effect}</p>
-          <p>Description: ${Move.description}</p>
+          <table class="move-table">
+            <tr>
+              <td class="move-label">Power:</td>
+              <td class="move-data">${Move.power}</td>
+            </tr>
+            <tr>
+              <td class="move-label">Accuracy:</td>
+              <td class="move-data">${Move.accuracy}</td>
+            </tr>
+            <tr>
+              <td class="move-label">PP:</td>
+              <td class="move-data">${Move.pp}</td>
+            </tr>
+            <tr>
+              <td class="move-label">Type:</td>
+              <td class="move-data">${Move.type}</td>
+            </tr>
+            <tr>
+              <td class="move-label">Damage Type:</td>
+              <td class="move-data">${Move.damage_type}</td>
+            </tr>
+            <tr>
+              <td class="move-label">Effect:</td>
+              <td class="move-data">${Move.effect}</td>
+            </tr>
+            <tr>
+              <td class="move-label">Description:</td>
+              <td class="move-data">${Move.description}</td>
+            </tr>
+          </table
       </div>
       `;
 
@@ -82,7 +105,7 @@ var displayMove = Move => {
 var displayPikachu = () => {
   var MoveHTMLString = `
     <div id = "move-card" class="card">
-    <h1>Nothing found. Have a gif of Pikachu</h1>
+    <h1 class="pikachu-message">Nothing found. Have a gif of Pikachu instead!</h1>
     <img src="https://media.giphy.com/media/lOa0tPKiMLdqVdFiS8/giphy.gif" alt="Dancing Pikachu">
     </div>
     `;
