@@ -12,7 +12,7 @@ var display20Poke = () => {
 var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
-      .then(function(response) {
+      .then(function (response) {
         const Pokemon = {
           id: response.id,
           name: response.name.replace("-", " "),
@@ -43,7 +43,9 @@ var displayPokemon = Pokemon => {
   var pokemonHTMLString = `
     <div class="flip-card">
       <div class="card-front">
-        <p class="card-title" onclick ="getinfo(${Pokemon.id})" >${Pokemon.name} </p>
+        <p class="card-title" onclick ="getinfo(${Pokemon.id})" >${
+    Pokemon.name
+    } </p>
         <img class="card-image default" src="${Pokemon.display}">
       </div>
       <div class="card-back">
@@ -52,8 +54,12 @@ var displayPokemon = Pokemon => {
           <img class="card-image " src="${Pokemon.shiny}"/>
         </div>
         <div class="audio-buttons">
-          <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
-          <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
+          <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${
+    Pokemon.id
+    })">
+          <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${
+    Pokemon.id
+    }.wav" ></audio>
         </div> 
         <div class="section-title">Info</div>
         <table class="info">
@@ -77,38 +83,57 @@ var displayPokemon = Pokemon => {
         <div class="section-title">Stats</div>
         <div class="stat-bars">
           <div class="bar-label">HP</div>
-          <div class="bar" style="--bar-value:${(Pokemon.hp/200) * 100}%;">${Pokemon.hp}</div>
+          <div class="bar" style="--bar-value:${(Pokemon.hp / 200) * 100}%;">${
+    Pokemon.hp
+    }</div>
           <div class="bar-label">Attack</div>
-          <div class="bar" style="--bar-value:${(Pokemon.attack/200) * 100}%;">${Pokemon.attack}</div>
+          <div class="bar" style="--bar-value:${(Pokemon.attack / 200) *
+    100}%;">${Pokemon.attack}</div>
           <div class="bar-label">Defense</div>
-          <div class="bar" style="--bar-value:${(Pokemon.defense/200) * 100}%;">${Pokemon.defense}</div>
+          <div class="bar" style="--bar-value:${(Pokemon.defense / 200) *
+    100}%;">${Pokemon.defense}</div>
           <div class="bar-label">Speed</div>
-          <div class="bar" style="--bar-value:${(Pokemon.speed/200) * 100}%;">${Pokemon.speed}</div>
+          <div class="bar" style="--bar-value:${(Pokemon.speed / 200) *
+    100}%;">${Pokemon.speed}</div>
           <div class="bar-label">Special Attack</div>
-          <div class="bar" style="--bar-value:${(Pokemon.special_attack/200) * 100}%;">${Pokemon.special_attack}</div>
+          <div class="bar" style="--bar-value:${(Pokemon.special_attack / 200) *
+    100}%;">${Pokemon.special_attack}</div>
           <div class="bar-label">Special Defense</div>
-          <div class="bar" style="--bar-value:${(Pokemon.special_defense/200) * 100}%;">${Pokemon.special_defense}</div>
+          <div class="bar" style="--bar-value:${(Pokemon.special_defense /
+      200) *
+    100}%;">${Pokemon.special_defense}</div>
         </div>
         <div class="section-title">Other Forms</div>
         <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
         <div class="section-title">Moves</div>
         <div id="move-info${Pokemon.id}" class="move-info"></div>
+        <div id="move-info-level${Pokemon.id}" class="move-info">Moves learn from level up
+        </div>
+        <div id="move-info-tutor${Pokemon.id}" class="move-info">Moves learn from tutor
+        </div>
+        <div id="move-info-machine${Pokemon.id}" class="move-info">Moves learn from items
+        </div>
+        <div id="move-info-egg${Pokemon.id}" class="move-info">Moves learn from bredding
+        </div>
+
+        <div 
       </div>
     </div>
     `;
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
   var moves = Pokemon.moves;
+  //console.log(moves);
 
   //Getting additional form
   P.getPokemonSpeciesByName(Pokemon.species) // with Promise
-    .then(function(response) {
+    .then(function (response) {
       const PokemonSpecies = {
         varieties: response.varieties
       };
       for (var k = 0; k < PokemonSpecies.varieties.length; k++) {
         if (k > 0) {
           P.getPokemonByName(PokemonSpecies.varieties[k].pokemon.name).then(
-            function(response) {
+            function (response) {
               const PokemonVariety = {
                 sprite: response.sprites.front_default,
                 name: response.name.replace("-", " ")
@@ -134,51 +159,92 @@ var displayPokemon = Pokemon => {
       }
     });
 
-    for (var i = 0; i < moves.length; ++i) {
-      var movesElement = document.getElementById("move-info" + Pokemon.id);
+  for (var i = 0; i < moves.length; ++i) {
+    if (
+      moves[i].version_group_details[moves[i].version_group_details.length - 1]
+        .move_learn_method.name == "egg"
+    ) {
       var MoveHTMLString = `
-        <p>${moves[i].move.name.replace("-"," ")}</p>
+        <p>${moves[i].move.name.replace("-", " ")}</p>
       `;
+      var movesElement = document.getElementById("move-info-egg" + Pokemon.id);
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
+    if (
+      moves[i].version_group_details[moves[i].version_group_details.length - 1]
+        .move_learn_method.name == "machine"
+    ) {
+      var MoveHTMLString = `
+        <p>${moves[i].move.name.replace("-", " ")}</p>
+      `;
+      var movesElement = document.getElementById(
+        "move-info-machine" + Pokemon.id
+      );
+      movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
+    }
+    if (
+      moves[i].version_group_details[moves[i].version_group_details.length - 1]
+        .move_learn_method.name == "level-up"
+    ) {
+      var MoveHTMLString = `
+        <p>${moves[i].move.name.replace("-", " ")} Level: ${moves[i].version_group_details[moves[i].version_group_details.length - 1].level_learned_at}</p>
+      `;
+      var movesElement = document.getElementById(
+        "move-info-level" + Pokemon.id
+      );
+      movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
+    }
+    if (
+      moves[i].version_group_details[moves[i].version_group_details.length - 1]
+        .move_learn_method.name == "tutor"
+    ) {
+      var MoveHTMLString = `
+        <p>${moves[i].move.name.replace("-", " ")}</p>
+      `;
+      var movesElement = document.getElementById(
+        "move-info-tutor" + Pokemon.id
+      );
+      movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
+    }
+  }
 
   //Getting additional moves
-//   for (var m = 0; m < Pokemon.moves.length; m++) {
-//     P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
-//       const Move = {
-//         name: response.name.replace("-", " "),
-//         power: response.power,
-//         accuracy: response.accuracy,
-//         pp: response.pp,
-//         type: response.damage_class.name,
-//         damage_type: response.type.name,
-//         effect: response.effect_entries[0].effect,
-//         effect_chance: response.effect_chance,
-//         description: response.flavor_text_entries[2].flavor_text
-//       };
-//       if (Move.power == null) {
-//         Move.power = 0;
-//       }
-//       if (Move.accuracy == null) {
-//         Move.power = 0;
-//       }
-//       Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
-//       Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
-//       var move_display = document.getElementById("extra-info" + Pokemon.id);
-//       var MoveHTMLString = `
-//       <div id ="move-card" class="card" >
-//           <h2 class="card-title"  >${Move.name} </h2>
-//           <p>Power: ${Move.power}</p>
-//           <p>Accuracy: ${Move.accuracy}</p>
-//           <p>PP: ${Move.pp}</p>
-//           <p>Type: ${Move.type}</p>
-//           <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
-//       </div>
-//       `;
-//       move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
-//     });
-//   }
-   };
+  //   for (var m = 0; m < Pokemon.moves.length; m++) {
+  //     P.getMoveByName(Pokemon.moves[m].move.name).then(function(response) {
+  //       const Move = {
+  //         name: response.name.replace("-", " "),
+  //         power: response.power,
+  //         accuracy: response.accuracy,
+  //         pp: response.pp,
+  //         type: response.damage_class.name,
+  //         damage_type: response.type.name,
+  //         effect: response.effect_entries[0].effect,
+  //         effect_chance: response.effect_chance,
+  //         description: response.flavor_text_entries[2].flavor_text
+  //       };
+  //       if (Move.power == null) {
+  //         Move.power = 0;
+  //       }
+  //       if (Move.accuracy == null) {
+  //         Move.power = 0;
+  //       }
+  //       Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
+  //       Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
+  //       var move_display = document.getElementById("extra-info" + Pokemon.id);
+  //       var MoveHTMLString = `
+  //       <div id ="move-card" class="card" >
+  //           <h2 class="card-title"  >${Move.name} </h2>
+  //           <p>Power: ${Move.power}</p>
+  //           <p>Accuracy: ${Move.accuracy}</p>
+  //           <p>PP: ${Move.pp}</p>
+  //           <p>Type: ${Move.type}</p>
+  //           <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
+  //       </div>
+  //       `;
+  //       move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
+  //     });
+  //   }
+};
 
 var playaudio = id => {
   var audio = document.getElementById("audio" + id);
@@ -208,7 +274,7 @@ var Filter = () => {
 var getinfo = id => {
   if (!Poke_cache[id]) {
     P.getPokemonByName(id) // with Promise
-      .then(function(response) {
+      .then(function (response) {
         //console.log(response);
         var Pokemon = {
           id: response.id,
