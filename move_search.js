@@ -19,7 +19,7 @@ var search = () => {
   } else {
     if (selected_category == "name") {
       P.getMoveByName(search_input) // with Promise
-        .then(function(response) {
+        .then(function (response) {
           const Move = {
             name: response.name.replace("-", " "),
             power: response.power,
@@ -47,14 +47,14 @@ var search = () => {
     }
     if (selected_category == "ailment") {
       P.getMoveAilmentByName(search_input) // with Promise
-        .then(function(response) {
+        .then(function (response) {
           const MoveList = response.moves;
           displayMoveList(MoveList);
         });
     }
     if (selected_category == "damage_type") {
       P.getMoveDamageClassByName(search_input) // with Promise
-        .then(function(response) {
+        .then(function (response) {
           const MoveList = response.moves;
           displayMoveList(MoveList);
         });
@@ -114,7 +114,7 @@ var displayPikachu = () => {
 var displayMoveList = MoveList => {
   for (let i = 0; i < MoveList.length; i++) {
     P.getMoveByName(MoveList[i].name) // with Promise
-      .then(function(response) {
+      .then(function (response) {
         const Move = {
           name: response.name.replace("-", " "),
           power: response.power,
@@ -134,19 +134,41 @@ var displayMoveList = MoveList => {
         }
         Move.damage_type_icon = "resources/" + Move.damage_type + ".png";
         Move.effect = Move.effect.replace("$effect_chance", Move.effect_chance);
-
         var MoveHTMLString = `
-        <div id ="move-card" class="card" >
-          <h2 class="card-title"  >${Move.name} </h2>
-          <p>Power: ${Move.power}</p>
-          <p>Accuracy: ${Move.accuracy}</p>
-          <p>PP: ${Move.pp}</p>
-          <p>Type: ${Move.type}</p>
-          <p>Damage Type: ${Move.damage_type} <img class ="damage_type_icon" src="${Move.damage_type_icon}"> </p>
-          <p>Effect: ${Move.effect}</p>
-          <p>Description: ${Move.description}</p>
+        <div id ="move-card" class="card">
+            <h2 class="card-title"  >${Move.name} </h2>
+            <table class="move-table">
+              <tr>
+                <td class="move-label">Power:</td>
+                <td class="move-data">${Move.power}</td>
+              </tr>
+              <tr>
+                <td class="move-label">Accuracy:</td>
+                <td class="move-data">${Move.accuracy}</td>
+              </tr>
+              <tr>
+                <td class="move-label">PP:</td>
+                <td class="move-data">${Move.pp}</td>
+              </tr>
+              <tr>
+                <td class="move-label">Type:</td>
+                <td class="move-data">${Move.type}</td>
+              </tr>
+              <tr>
+                <td class="move-label">Damage Type:</td>
+                <td class="move-data">${Move.damage_type}</td>
+              </tr>
+              <tr>
+                <td class="move-label">Effect:</td>
+                <td class="move-data">${Move.effect}</td>
+              </tr>
+              <tr>
+                <td class="move-label">Description:</td>
+                <td class="move-data">${Move.description}</td>
+              </tr>
+            </table
         </div>
-         `;
+        `;
 
         move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
       });
