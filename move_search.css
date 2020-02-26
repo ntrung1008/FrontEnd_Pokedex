@@ -58,11 +58,13 @@ body {
 
 .move-card h2 {
   font-family: 'Courier New', Courier, monospace;
+  text-transform: capitalize;
 }
 
 .card-title {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
+  text-transform: capitalize;
 }
 
 .move-table {

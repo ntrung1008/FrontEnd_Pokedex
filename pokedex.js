@@ -19,12 +19,12 @@ var getAllPokemons = input => {
           default: response.sprites["front_default"],
           shiny: response.sprites["front_shiny"],
           display: response.sprites["front_default"],
-          type: response.types.map(type => type.type.name).join(","),
+          type: response.types.map(type => type.type.name).join(", "),
           height: response.height,
           weight: response.weight,
           ability: response.abilities
-            .map(ability => ability.ability.name)
-            .join(","),
+            .map(ability => ability.ability.name.replace("-", " "))
+            .join(", "),
           speed: response.stats[0].base_stat,
           special_defense: response.stats[1].base_stat,
           special_attack: response.stats[2].base_stat,
@@ -83,23 +83,23 @@ var displayPokemon = Pokemon => {
         <div class="section-title">Stats</div>
         <div class="stat-bars">
           <div class="bar-label">HP</div>
-          <div class="bar" style="--bar-value:${(Pokemon.hp / 200) * 100}%;">${
+          <div class="bar bar-hp" style="--bar-value:${(Pokemon.hp / 200) * 100}%;">${
     Pokemon.hp
     }</div>
           <div class="bar-label">Attack</div>
-          <div class="bar" style="--bar-value:${(Pokemon.attack / 200) *
+          <div class="bar bar-attack" style="--bar-value:${(Pokemon.attack / 200) *
     100}%;">${Pokemon.attack}</div>
           <div class="bar-label">Defense</div>
-          <div class="bar" style="--bar-value:${(Pokemon.defense / 200) *
+          <div class="bar bar-defense" style="--bar-value:${(Pokemon.defense / 200) *
     100}%;">${Pokemon.defense}</div>
           <div class="bar-label">Speed</div>
-          <div class="bar" style="--bar-value:${(Pokemon.speed / 200) *
+          <div class="bar bar-speed" style="--bar-value:${(Pokemon.speed / 200) *
     100}%;">${Pokemon.speed}</div>
           <div class="bar-label">Special Attack</div>
-          <div class="bar" style="--bar-value:${(Pokemon.special_attack / 200) *
+          <div class="bar bar-s-attack" style="--bar-value:${(Pokemon.special_attack / 200) *
     100}%;">${Pokemon.special_attack}</div>
           <div class="bar-label">Special Defense</div>
-          <div class="bar" style="--bar-value:${(Pokemon.special_defense /
+          <div class="bar bar-s-defense" style="--bar-value:${(Pokemon.special_defense /
       200) *
     100}%;">${Pokemon.special_defense}</div>
         </div>
@@ -113,7 +113,7 @@ var displayPokemon = Pokemon => {
         </div>
         <div id="move-info-machine${Pokemon.id}" class="move-info">Moves learn from items
         </div>
-        <div id="move-info-egg${Pokemon.id}" class="move-info">Moves learn from bredding
+        <div id="move-info-egg${Pokemon.id}" class="move-info">Moves learn from breeding
         </div>
 
         <div 
@@ -130,6 +130,22 @@ var displayPokemon = Pokemon => {
       const PokemonSpecies = {
         varieties: response.varieties
       };
+      if (PokemonSpecies.varieties.length == 1) {
+        var VarietyHTMLString = `
+                <div class="variety">
+                  <p id="variety-name" class="variety-name"> 
+                    ${Pokemon.name} does not have other form
+                  </p>
+                </div>
+                `;
+        var variety_display = document.getElementById(
+          "extra-info" + Pokemon.id
+        );
+        variety_display.insertAdjacentHTML(
+          "beforeend",
+          VarietyHTMLString
+        );
+      }
       for (var k = 0; k < PokemonSpecies.varieties.length; k++) {
         if (k > 0) {
           P.getPokemonByName(PokemonSpecies.varieties[k].pokemon.name).then(
@@ -170,6 +186,7 @@ var displayPokemon = Pokemon => {
       var movesElement = document.getElementById("move-info-egg" + Pokemon.id);
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
+
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "machine"
@@ -182,6 +199,7 @@ var displayPokemon = Pokemon => {
       );
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
+
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "level-up"
@@ -194,6 +212,7 @@ var displayPokemon = Pokemon => {
       );
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
+
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "tutor"

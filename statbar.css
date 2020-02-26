@@ -24,7 +24,7 @@
     margin-bottom: 2px;
     display: flex;
     justify-content: flex-start;
-    color: white;
+    color:black;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
     align-items: center;
@@ -53,4 +53,22 @@
 .bar-label {
     font-family: 'Courier New', Courier, monospace;
     font-size: small;
+}
+.bar-hp{
+    background-color: lightcoral;
+}
+.bar-attack{
+    background-color: lightsalmon;
+}
+.bar-defense{
+    background-color: rgb(245, 245, 35);
+}
+.bar-s-attack{
+    background-color: lightblue;
+}
+.bar-s-defense{
+    background-color: lightgreen;
+}
+.bar-speed{
+    background-color: lightpink;
 }
