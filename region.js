@@ -89,9 +89,11 @@ var displayRegion = RegionInfo => {
     //insert Region name and map
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
+            <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
             <img class = "region-pic" src ="resources/Kanto.png">
+            <div class="region-description">
+              The Kanto region is located east of Johto and south of Sinnoh. All cities in Kanto are named after colors (Viridian City, Lavender Town, Indigo Plateau, etc.), with the exception of Pallet Town, which is also a reference to color.
+            </div>
         </div>
          `;
     region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
@@ -100,11 +102,11 @@ var displayRegion = RegionInfo => {
       //Each region has many locations
       //Insert each of those location names
       var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
+            <div class ="location-card" id="${RegionInfo.locations[i].name}">
+              <div class="location-name">
+              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              </div>
+            </div>
             `;
       var location_display = document.getElementById("region-card");
       location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
@@ -116,13 +118,10 @@ var displayRegion = RegionInfo => {
           var Areas = response.areas;
           for (let j = 0; j < Areas.length; j++) {
             var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
+                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
+                                `;
+            var area_display = document.getElementById(RegionInfo.locations[i].name);
             area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
 
             P.getLocationAreaByName(Areas[j].name) // with Promise
@@ -132,555 +131,24 @@ var displayRegion = RegionInfo => {
                 };
                 for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
                   var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
+                                <div class ="pokemon-card" id="${Area_info.Pokemon_encounters[k].pokemon.name}${Areas[j].name}">
+                                  <div class= "pokemon-name">
+                                    ${Area_info.Pokemon_encounters[k].pokemon.name.replace("-", " ")}
+                                  </div>
                                 </div>
-                            `;
+                                `;
                   //console.log( PokemonHtmlString);
                   var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
+                  pokemon_display.insertAdjacentHTML("beforeend",PokemonHTMLString);
 
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
+                  P.getPokemonByName(Area_info.Pokemon_encounters[k].pokemon.name) // with Promise
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" >
                             `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
-                    });
-                }
-              });
-          }
-        });
-    }
-  } else if (RegionInfo.name == "Johto") {
-    //insert Region name and map
-    var RegionHTMLString = `
-        <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
-            <img class = "region-pic" src ="resources/Johto.png">
-        </div>
-         `;
-    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
-
-    for (let i = 0; i < RegionInfo.locations.length; ++i) {
-      //Each region has many locations
-      //Insert each of those location names
-      var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
-            `;
-      var location_display = document.getElementById("region-card");
-      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
-
-      //Each locations has many areas
-      //Get those areas and insert them
-      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
-        .then(function(response) {
-          var Areas = response.areas;
-          for (let j = 0; j < Areas.length; j++) {
-            var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
-            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
-
-            P.getLocationAreaByName(Areas[j].name) // with Promise
-              .then(function(response) {
-                var Area_info = {
-                  Pokemon_encounters: response.pokemon_encounters
-                };
-                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
-                  var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
-                                </div>
-                            `;
-                  //console.log( PokemonHtmlString);
-                  var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
-
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
-                    .then(function(response) {
-                      var sprite = response.sprites["front_default"];
-                      var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
-                            `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
-                    });
-                }
-              });
-          }
-        });
-    }
-  } else if (RegionInfo.name == "Hoenn") {
-    //insert Region name and map
-    var RegionHTMLString = `
-        <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
-            <img class = "region-pic" src ="resources/Hoenn.png">
-        </div>
-         `;
-    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
-
-    for (let i = 0; i < RegionInfo.locations.length; ++i) {
-      //Each region has many locations
-      //Insert each of those location names
-      var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
-            `;
-      var location_display = document.getElementById("region-card");
-      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
-
-      //Each locations has many areas
-      //Get those areas and insert them
-      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
-        .then(function(response) {
-          var Areas = response.areas;
-          for (let j = 0; j < Areas.length; j++) {
-            var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
-            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
-
-            P.getLocationAreaByName(Areas[j].name) // with Promise
-              .then(function(response) {
-                var Area_info = {
-                  Pokemon_encounters: response.pokemon_encounters
-                };
-                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
-                  var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
-                                </div>
-                            `;
-                  //console.log( PokemonHtmlString);
-                  var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
-
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
-                    .then(function(response) {
-                      var sprite = response.sprites["front_default"];
-                      var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
-                            `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
-                    });
-                }
-              });
-          }
-        });
-    }
-  } else if (RegionInfo.name == "Sinnoh") {
-    //insert Region name and map
-    var RegionHTMLString = `
-        <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
-            <img class = "region-pic" src ="resources/Sinnoh.png">
-        </div>
-         `;
-    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
-
-    for (let i = 0; i < RegionInfo.locations.length; ++i) {
-      //Each region has many locations
-      //Insert each of those location names
-      var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
-            `;
-      var location_display = document.getElementById("region-card");
-      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
-
-      //Each locations has many areas
-      //Get those areas and insert them
-      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
-        .then(function(response) {
-          var Areas = response.areas;
-          for (let j = 0; j < Areas.length; j++) {
-            var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
-            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
-
-            P.getLocationAreaByName(Areas[j].name) // with Promise
-              .then(function(response) {
-                var Area_info = {
-                  Pokemon_encounters: response.pokemon_encounters
-                };
-                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
-                  var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
-                                </div>
-                            `;
-                  //console.log( PokemonHtmlString);
-                  var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
-
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
-                    .then(function(response) {
-                      var sprite = response.sprites["front_default"];
-                      var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
-                            `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
-                    });
-                }
-              });
-          }
-        });
-    }
-  } else if (RegionInfo.name == "Unova") {
-    //insert Region name and map
-    var RegionHTMLString = `
-        <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
-            <img class = "region-pic" src ="resources/Unova.png">
-        </div>
-         `;
-    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
-
-    for (let i = 0; i < RegionInfo.locations.length; ++i) {
-      //Each region has many locations
-      //Insert each of those location names
-      var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
-            `;
-      var location_display = document.getElementById("region-card");
-      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
-
-      //Each locations has many areas
-      //Get those areas and insert them
-      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
-        .then(function(response) {
-          var Areas = response.areas;
-          for (let j = 0; j < Areas.length; j++) {
-            var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
-            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
-
-            P.getLocationAreaByName(Areas[j].name) // with Promise
-              .then(function(response) {
-                var Area_info = {
-                  Pokemon_encounters: response.pokemon_encounters
-                };
-                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
-                  var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
-                                </div>
-                            `;
-                  //console.log( PokemonHtmlString);
-                  var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
-
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
-                    .then(function(response) {
-                      var sprite = response.sprites["front_default"];
-                      var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
-                            `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
-                    });
-                }
-              });
-          }
-        });
-    }
-  } else if (RegionInfo.name == "Kalos") {
-    //insert Region name and map
-    var RegionHTMLString = `
-        <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
-            <img class = "region-pic" src ="resources/Kalos.png">
-        </div>
-         `;
-    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
-
-    for (let i = 0; i < RegionInfo.locations.length; ++i) {
-      //Each region has many locations
-      //Insert each of those location names
-      var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
-            `;
-      var location_display = document.getElementById("region-card");
-      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
-
-      //Each locations has many areas
-      //Get those areas and insert them
-      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
-        .then(function(response) {
-          var Areas = response.areas;
-          for (let j = 0; j < Areas.length; j++) {
-            var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
-            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
-
-            P.getLocationAreaByName(Areas[j].name) // with Promise
-              .then(function(response) {
-                var Area_info = {
-                  Pokemon_encounters: response.pokemon_encounters
-                };
-                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
-                  var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
-                                </div>
-                            `;
-                  //console.log( PokemonHtmlString);
-                  var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
-
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
-                    .then(function(response) {
-                      var sprite = response.sprites["front_default"];
-                      var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
-                            `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
-                    });
-                }
-              });
-          }
-        });
-    }
-  } else if (RegionInfo.name == "Alola") {
-    //insert Region name and map
-    var RegionHTMLString = `
-        <div id ="region-card" class="card" >
-            <h2 class="card-title"  >${RegionInfo.name} </h2>
-            <p>Generation: ${RegionInfo.main_generation}</p>
-            <img class = "region-pic" src ="resources/Alola.png">
-        </div>
-         `;
-    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
-
-    for (let i = 0; i < RegionInfo.locations.length; ++i) {
-      //Each region has many locations
-      //Insert each of those location names
-      var LocationHTMLString = `
-            <div id="${
-              RegionInfo.locations[i].name
-            }">Location name: ${RegionInfo.locations[i].name
-        .toUpperCase()
-        .replace("-", " ")}</div>
-            `;
-      var location_display = document.getElementById("region-card");
-      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
-
-      //Each locations has many areas
-      //Get those areas and insert them
-      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
-        .then(function(response) {
-          var Areas = response.areas;
-          for (let j = 0; j < Areas.length; j++) {
-            var AreaHTMLString = `
-                        <div id="${Areas[j].name}" >Area name: ${Areas[j].name
-              .toUpperCase()
-              .replace("-", " ")}</div>
-                    `;
-            var area_display = document.getElementById(
-              RegionInfo.locations[i].name
-            );
-            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
-
-            P.getLocationAreaByName(Areas[j].name) // with Promise
-              .then(function(response) {
-                var Area_info = {
-                  Pokemon_encounters: response.pokemon_encounters
-                };
-                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
-                  var PokemonHTMLString = `
-                                <div id="${
-                                  Area_info.Pokemon_encounters[k].pokemon.name
-                                }${Areas[j].name}">
-                                    Pokemon Name: ${Area_info.Pokemon_encounters[
-                                      k
-                                    ].pokemon.name
-                                      .toUpperCase()
-                                      .replace("-", " ")}
-                                </div>
-                            `;
-                  //console.log( PokemonHtmlString);
-                  var pokemon_display = document.getElementById(Areas[j].name);
-                  pokemon_display.insertAdjacentHTML(
-                    "beforeend",
-                    PokemonHTMLString
-                  );
-
-                  P.getPokemonByName(
-                    Area_info.Pokemon_encounters[k].pokemon.name
-                  ) // with Promise
-                    .then(function(response) {
-                      var sprite = response.sprites["front_default"];
-                      var PokemonSpriteHTMLSTRING = `
-                                <img src="${sprite}" >
-                            `;
-                      var pokemon_sprite = document.getElementById(
-                        Area_info.Pokemon_encounters[k].pokemon.name +
-                          Areas[j].name
-                      );
-                      pokemon_sprite.insertAdjacentHTML(
-                        "beforeend",
-                        PokemonSpriteHTMLSTRING
-                      );
+                      var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
+                      pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
                     });
                 }
               });
@@ -688,4 +156,357 @@ var displayRegion = RegionInfo => {
         });
     }
   }
+  else  if (RegionInfo.name == "Johto") {
+    //insert Region name and map
+    var RegionHTMLString = `
+        <div id ="region-card" class="card" >
+            <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
+            <img class = "region-pic" src ="resources/Johto.png">
+            <div class="region-description">
+            Johto is located west of Kanto and south of Sinnoh</div>
+        </div>
+         `;
+    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
+
+    for (let i = 0; i < RegionInfo.locations.length; ++i) {
+      //Each region has many locations
+      //Insert each of those location names
+      var LocationHTMLString = `
+            <div class ="location-card" id="${RegionInfo.locations[i].name}">
+              <div class="location-name">
+              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              </div>
+            </div>
+            `;
+      var location_display = document.getElementById("region-card");
+      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
+
+      //Each locations has many areas
+      //Get those areas and insert them
+      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
+        .then(function(response) {
+          var Areas = response.areas;
+          for (let j = 0; j < Areas.length; j++) {
+            var AreaHTMLString = `
+                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
+                                `;
+            var area_display = document.getElementById(RegionInfo.locations[i].name);
+            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
+
+            P.getLocationAreaByName(Areas[j].name) // with Promise
+              .then(function(response) {
+                var Area_info = {
+                  Pokemon_encounters: response.pokemon_encounters
+                };
+                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
+                  var PokemonHTMLString = `
+                                <div class ="pokemon-card" id="${Area_info.Pokemon_encounters[k].pokemon.name}${Areas[j].name}">
+                                  <div class= "pokemon-name">
+                                    ${Area_info.Pokemon_encounters[k].pokemon.name.replace("-", " ")}
+                                  </div>
+                                </div>
+                                `;
+                  //console.log( PokemonHtmlString);
+                  var pokemon_display = document.getElementById(Areas[j].name);
+                  pokemon_display.insertAdjacentHTML("beforeend",PokemonHTMLString);
+
+                  P.getPokemonByName(Area_info.Pokemon_encounters[k].pokemon.name) // with Promise
+                    .then(function(response) {
+                      var sprite = response.sprites["front_default"];
+                      var PokemonSpriteHTMLSTRING = `
+                                <img class= "poke-pic" src="${sprite}" >
+                            `;
+                      var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
+                      pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
+                    });
+                }
+              });
+          }
+        });
+    }
+  }
+  else  if (RegionInfo.name == "Hoenn") {
+    //insert Region name and map
+    var RegionHTMLString = `
+        <div id ="region-card" class="card" >
+            <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
+            <img class = "region-pic" src ="resources/Hoenn.png">
+            <div class="region-description">
+              Hoenn is located south of Sinnoh. The names of most of the cities in Hoenn are made of two words put together (Little Root, Fort Tree, Slate Port, Ever Grande, etc.) rather than colors or plants as Kanto and Johto 
+            </div>
+        </div>
+         `;
+    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
+
+    for (let i = 0; i < RegionInfo.locations.length; ++i) {
+      //Each region has many locations
+      //Insert each of those location names
+      var LocationHTMLString = `
+            <div class ="location-card" id="${RegionInfo.locations[i].name}">
+              <div class="location-name">
+              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              </div>
+            </div>
+            `;
+      var location_display = document.getElementById("region-card");
+      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
+
+      //Each locations has many areas
+      //Get those areas and insert them
+      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
+        .then(function(response) {
+          var Areas = response.areas;
+          for (let j = 0; j < Areas.length; j++) {
+            var AreaHTMLString = `
+                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
+                                `;
+            var area_display = document.getElementById(RegionInfo.locations[i].name);
+            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
+
+            P.getLocationAreaByName(Areas[j].name) // with Promise
+              .then(function(response) {
+                var Area_info = {
+                  Pokemon_encounters: response.pokemon_encounters
+                };
+                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
+                  var PokemonHTMLString = `
+                                <div class ="pokemon-card" id="${Area_info.Pokemon_encounters[k].pokemon.name}${Areas[j].name}">
+                                  <div class= "pokemon-name">
+                                    ${Area_info.Pokemon_encounters[k].pokemon.name.replace("-", " ")}
+                                  </div>
+                                </div>
+                                `;
+                  //console.log( PokemonHtmlString);
+                  var pokemon_display = document.getElementById(Areas[j].name);
+                  pokemon_display.insertAdjacentHTML("beforeend",PokemonHTMLString);
+
+                  P.getPokemonByName(Area_info.Pokemon_encounters[k].pokemon.name) // with Promise
+                    .then(function(response) {
+                      var sprite = response.sprites["front_default"];
+                      var PokemonSpriteHTMLSTRING = `
+                                <img class= "poke-pic" src="${sprite}" >
+                            `;
+                      var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
+                      pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
+                    });
+                }
+              });
+          }
+        });
+    }
+  }
+  else  if (RegionInfo.name == "Sinnoh") {
+    //insert Region name and map
+    var RegionHTMLString = `
+        <div id ="region-card" class="card" >
+            <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
+            <img class = "region-pic" src ="resources/Sinnoh.png">
+            <div class="region-description">
+            Sinnoh is located north of Kanto, Johto, and Hoenn. Most of Sinnoh's routes are on land, having very few water routes, in vast contrast to Hoenn
+            </div>
+        </div>
+         `;
+    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
+
+    for (let i = 0; i < RegionInfo.locations.length; ++i) {
+      //Each region has many locations
+      //Insert each of those location names
+      var LocationHTMLString = `
+            <div class ="location-card" id="${RegionInfo.locations[i].name}">
+              <div class="location-name">
+              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              </div>
+            </div>
+            `;
+      var location_display = document.getElementById("region-card");
+      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
+
+      //Each locations has many areas
+      //Get those areas and insert them
+      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
+        .then(function(response) {
+          var Areas = response.areas;
+          for (let j = 0; j < Areas.length; j++) {
+            var AreaHTMLString = `
+                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
+                                `;
+            var area_display = document.getElementById(RegionInfo.locations[i].name);
+            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
+
+            P.getLocationAreaByName(Areas[j].name) // with Promise
+              .then(function(response) {
+                var Area_info = {
+                  Pokemon_encounters: response.pokemon_encounters
+                };
+                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
+                  var PokemonHTMLString = `
+                                <div class ="pokemon-card" id="${Area_info.Pokemon_encounters[k].pokemon.name}${Areas[j].name}">
+                                  <div class= "pokemon-name">
+                                    ${Area_info.Pokemon_encounters[k].pokemon.name.replace("-", " ")}
+                                  </div>
+                                </div>
+                                `;
+                  //console.log( PokemonHtmlString);
+                  var pokemon_display = document.getElementById(Areas[j].name);
+                  pokemon_display.insertAdjacentHTML("beforeend",PokemonHTMLString);
+
+                  P.getPokemonByName(Area_info.Pokemon_encounters[k].pokemon.name) // with Promise
+                    .then(function(response) {
+                      var sprite = response.sprites["front_default"];
+                      var PokemonSpriteHTMLSTRING = `
+                                <img class= "poke-pic" src="${sprite}" >
+                            `;
+                      var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
+                      pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
+                    });
+                }
+              });
+          }
+        });
+    }
+  }
+  else  if (RegionInfo.name == "Unova") {
+    //insert Region name and map
+    var RegionHTMLString = `
+        <div id ="region-card" class="card" >
+            <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
+            <img class = "region-pic" src ="resources/Unova.png">
+            <div class="region-description">
+            Unova is far away from the four other large regions, and the Pokémon which inhabit Unova are diverse and different from those of Kanto, Johto, Hoenn, and Sinnoh.            </div>
+        </div>
+         `;
+    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
+
+    for (let i = 0; i < RegionInfo.locations.length; ++i) {
+      //Each region has many locations
+      //Insert each of those location names
+      var LocationHTMLString = `
+            <div class ="location-card" id="${RegionInfo.locations[i].name}">
+              <div class="location-name">
+              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              </div>
+            </div>
+            `;
+      var location_display = document.getElementById("region-card");
+      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
+
+      //Each locations has many areas
+      //Get those areas and insert them
+      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
+        .then(function(response) {
+          var Areas = response.areas;
+          for (let j = 0; j < Areas.length; j++) {
+            var AreaHTMLString = `
+                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
+                                `;
+            var area_display = document.getElementById(RegionInfo.locations[i].name);
+            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
+
+            P.getLocationAreaByName(Areas[j].name) // with Promise
+              .then(function(response) {
+                var Area_info = {
+                  Pokemon_encounters: response.pokemon_encounters
+                };
+                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
+                  var PokemonHTMLString = `
+                                <div class ="pokemon-card" id="${Area_info.Pokemon_encounters[k].pokemon.name}${Areas[j].name}">
+                                  <div class= "pokemon-name">
+                                    ${Area_info.Pokemon_encounters[k].pokemon.name.replace("-", " ")}
+                                  </div>
+                                </div>
+                                `;
+                  //console.log( PokemonHtmlString);
+                  var pokemon_display = document.getElementById(Areas[j].name);
+                  pokemon_display.insertAdjacentHTML("beforeend",PokemonHTMLString);
+
+                  P.getPokemonByName(Area_info.Pokemon_encounters[k].pokemon.name) // with Promise
+                    .then(function(response) {
+                      var sprite = response.sprites["front_default"];
+                      var PokemonSpriteHTMLSTRING = `
+                                <img class= "poke-pic" src="${sprite}" >
+                            `;
+                      var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
+                      pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
+                    });
+                }
+              });
+          }
+        });
+    }
+  }
+  else  if (RegionInfo.name == "Kalos") {
+    //insert Region name and map
+    var RegionHTMLString = `
+        <div id ="region-card" class="card" >
+            <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
+            <img class = "region-pic" src ="resources/Kalos.png">
+            <div class="region-description">
+            The Kalos region is shaped like a five-pointed star, with one of its biggest cities being Lumiose City in the north-central part of the region. It features a vast network of rivers and waterways snaking through much of its landscape, cities and towns.            </div>
+        </div>
+         `;
+    region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
+
+    for (let i = 0; i < RegionInfo.locations.length; ++i) {
+      //Each region has many locations
+      //Insert each of those location names
+      var LocationHTMLString = `
+            <div class ="location-card" id="${RegionInfo.locations[i].name}">
+              <div class="location-name">
+              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              </div>
+            </div>
+            `;
+      var location_display = document.getElementById("region-card");
+      location_display.insertAdjacentHTML("beforeend", LocationHTMLString);
+
+      //Each locations has many areas
+      //Get those areas and insert them
+      P.getLocationByName(RegionInfo.locations[i].name) // with Promise
+        .then(function(response) {
+          var Areas = response.areas;
+          for (let j = 0; j < Areas.length; j++) {
+            var AreaHTMLString = `
+                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
+                                `;
+            var area_display = document.getElementById(RegionInfo.locations[i].name);
+            area_display.insertAdjacentHTML("beforeend", AreaHTMLString);
+
+            P.getLocationAreaByName(Areas[j].name) // with Promise
+              .then(function(response) {
+                var Area_info = {
+                  Pokemon_encounters: response.pokemon_encounters
+                };
+                for (let k = 0; k < Area_info.Pokemon_encounters.length; ++k) {
+                  var PokemonHTMLString = `
+                                <div class ="pokemon-card" id="${Area_info.Pokemon_encounters[k].pokemon.name}${Areas[j].name}">
+                                  <div class= "pokemon-name">
+                                    ${Area_info.Pokemon_encounters[k].pokemon.name.replace("-", " ")}
+                                  </div>
+                                </div>
+                                `;
+                  //console.log( PokemonHtmlString);
+                  var pokemon_display = document.getElementById(Areas[j].name);
+                  pokemon_display.insertAdjacentHTML("beforeend",PokemonHTMLString);
+
+                  P.getPokemonByName(Area_info.Pokemon_encounters[k].pokemon.name) // with Promise
+                    .then(function(response) {
+                      var sprite = response.sprites["front_default"];
+                      var PokemonSpriteHTMLSTRING = `
+                                <img class= "poke-pic" src="${sprite}" >
+                            `;
+                      var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
+                      pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
+                    });
+                }
+              });
+          }
+        });
+    }
+  }
+  
 };

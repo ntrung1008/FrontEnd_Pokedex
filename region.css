@@ -1,4 +1,75 @@
+
 .region-pic {
-  width: 70%;
+  width: 100%;
   height: auto;
+}
+.search-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightslategray;
+  margin: 50px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.search-body > * {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.search-body input {
+  width: 60%;
+  font-size: x-large;
+}
+
+.search-body select {
+  width: 60%;
+  font-size: x-large;
+}
+
+.search-body button {
+  border: solid #2a75bb;
+  color: #2a75bb;
+  border-radius: 5%;
+  height: auto;
+  width: auto;
+  font-size: 3em;
+  background-color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+}
+
+.search-body button:hover {
+  background-color: #2a75bb;
+  color: white;
+}
+.card-title{
+  margin: auto;
+  font-size: 3em;
+  color: aquamarine;
+}
+.location-card{
+  text-transform: capitalize;
+}
+.area-pokemon-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  border-color: black;
+}
+.area-pokemon-card .pokemon-card:nth-child(even){
+  background-color: lightgray;
+}
+.area-pokemon-card .pokemon-card:nth-child(odd){
+  background-color: lightblue;
+}
+.location-card{
+  margin-top:50px;
+}
+.location-name{
+  background-color: lightsalmon;
+  font-size: 2em;
+}
+
+.location-card .area-card{
+  background-color: lightgreen;
 }

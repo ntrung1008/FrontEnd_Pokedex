@@ -1,5 +1,5 @@
 .damage_type_icon {
-  width: 5%;
+  width: 2%;
   height: auto;
 }
 
@@ -54,15 +54,19 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  margin-top: 30px;
 }
 
 .move-card h2 {
   font-family: 'Courier New', Courier, monospace;
+  text-transform: capitalize;
+  margin-top: 10px;
 }
 
 .card-title {
   font-family: 'Courier New', Courier, monospace;
   font-weight: bolder;
+  text-transform: capitalize;
 }
 
 .move-table {
