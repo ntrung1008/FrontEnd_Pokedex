@@ -26,11 +26,13 @@ body {
 .search-body input {
   width: 60%;
   font-size: x-large;
+  font-family: 'Boogaloo';
 }
 
 .search-body select {
   width: 60%;
   font-size: x-large;
+  font-family: 'Boogaloo';
 }
 
 .search-body button {
@@ -41,7 +43,7 @@ body {
   width: auto;
   font-size: 3em;
   background-color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
   font-weight: bolder;
 }
 
@@ -58,13 +60,13 @@ body {
 }
 
 .move-card h2 {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
   text-transform: capitalize;
   margin-top: 10px;
 }
 
 .card-title {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
   font-weight: bolder;
   text-transform: capitalize;
 }
@@ -72,7 +74,7 @@ body {
 .move-table {
   width: 100%;
   font-size: large;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Boogaloo';
 }
 
 .move-table tr:nth-child(odd) {
@@ -85,9 +87,9 @@ body {
 }
 
 .pikachu-message {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
 }
 
 h1 {
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
 }

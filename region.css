@@ -20,7 +20,7 @@ body {
   background-color: white;
   margin: 50px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
 }
 
 .search-body > * {
@@ -31,13 +31,13 @@ body {
 .search-body input {
   width: 60%;
   font-size: x-large;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
 }
 
 .search-body select {
   width: 60%;
   font-size: x-large;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
 }
 
 .search-body button {
@@ -48,7 +48,7 @@ body {
   width: auto;
   font-size: 3em;
   background-color: white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Bangers';
   font-weight: bolder;
 }
 
@@ -69,6 +69,7 @@ body {
 
 .region-description {
   margin: 5%;
+  font-family: 'Boogaloo';
 }
 
 .card-title{
