@@ -65,19 +65,19 @@ var displayPokemon = Pokemon => {
         <table class="info">
           <tr>
             <td>Height</td>
-            <td>${Pokemon.height}</td>
+            <td class="info-value">${Pokemon.height}</td>
           </tr>
           <tr>
             <td>Weight</td>
-            <td>${Pokemon.weight}</td>
+            <td class="info-value">${Pokemon.weight}</td>
           </tr>
           <tr>
             <td>Type</td>
-            <td>${Pokemon.type}</td>
+            <td class="info-value">${Pokemon.type}</td>
           </tr>
           <tr>
             <td>Ability</td>
-            <td>${Pokemon.ability}</td>
+            <td class="info-value">${Pokemon.ability}</td>
           </tr>
         </table>
         <div class="section-title">Stats</div>

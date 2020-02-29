@@ -94,6 +94,9 @@ var displayRegion = RegionInfo => {
             <div class="region-description">
               The Kanto region is located east of Johto and south of Sinnoh. All cities in Kanto are named after colors (Viridian City, Lavender Town, Indigo Plateau, etc.), with the exception of Pallet Town, which is also a reference to color.
             </div>
+            <div class="locations-title">
+              <p>Locations</p>
+            </div>
         </div>
          `;
     region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
@@ -104,7 +107,7 @@ var displayRegion = RegionInfo => {
       var LocationHTMLString = `
             <div class ="location-card" id="${RegionInfo.locations[i].name}">
               <div class="location-name">
-              Location name: ${RegionInfo.locations[i].name.replace("-", " ")}
+              ${RegionInfo.locations[i].name.replace("-", " ")}
               </div>
             </div>
             `;
@@ -118,7 +121,7 @@ var displayRegion = RegionInfo => {
           var Areas = response.areas;
           for (let j = 0; j < Areas.length; j++) {
             var AreaHTMLString = `
-                        <div class ="area-card">Area name: ${Areas[j].name.replace("-", " ")}</div>
+                        <div class ="area-card">Area: ${Areas[j].name.replace("-", " ")}</div>
                         <div class ="area-pokemon-card" id="${Areas[j].name}" </div>
                                 `;
             var area_display = document.getElementById(RegionInfo.locations[i].name);
@@ -163,7 +166,8 @@ var displayRegion = RegionInfo => {
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
             <img class = "region-pic" src ="resources/Johto.png">
             <div class="region-description">
-            Johto is located west of Kanto and south of Sinnoh</div>
+              Johto is located west of Kanto and south of Sinnoh
+            </div>
         </div>
          `;
     region_display.insertAdjacentHTML("beforeend", RegionHTMLString);
