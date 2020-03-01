@@ -1,3 +1,4 @@
+
 var pokedex = document.getElementById("pokedex");
 var P = new Pokedex.Pokedex();
 var Poke_cache = [];
@@ -13,6 +14,7 @@ var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
       .then(function (response) {
+        console.log(response.name);
         const Pokemon = {
           id: response.id,
           name: response.name.replace("-", " "),
@@ -32,9 +34,11 @@ var getAllPokemons = input => {
           attack: response.stats[4].base_stat,
           hp: response.stats[5].base_stat,
           species: response.species.name,
-          moves: response.moves
+          moves: response.moves,
+          defense_stats: buildDefenseStats(response.types)
         };
         displayPokemon(Pokemon);
+        console.log(Pokemon.defense_stats);
       });
   }
 };
@@ -103,6 +107,10 @@ var displayPokemon = Pokemon => {
       200) *
     100}%;">${Pokemon.special_defense}</div>
         </div>
+        <div class="section-title">Damage Multiplier When Attacked</div>
+        <div class="defense-stats">
+            <table class="info" id="defense${Pokemon.id}"></table>
+        </div> 
         <div class="section-title">Other Forms</div>
         <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
         <div class="section-title">Moves</div>
@@ -116,11 +124,25 @@ var displayPokemon = Pokemon => {
         <div id="move-info-egg${Pokemon.id}" class="move-info">Moves learn from breeding
         </div>
 
-        <div 
       </div>
     </div>
     `;
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
+
+  defenseStatsDiv = document.getElementById("defense" + Pokemon.id);
+  for (const [key, value] of Pokemon.defense_stats.entries()) {
+    if (value != 1) {
+      let defenseStatsHtml = `
+      <tr>
+        <td>${key}: </td>
+        <td class="info-value">${value}x</td>
+      </tr>
+      `
+      defenseStatsDiv.insertAdjacentHTML("beforeend", defenseStatsHtml);
+    }
+    
+  }
+
   var moves = Pokemon.moves;
   //console.log(moves);
 
@@ -358,6 +380,70 @@ var Close = () => {
   var remove = document.querySelector(".popup");
   remove.parentElement.removeChild(remove);
 };
+
+let typeLocation = {
+  'normal':0,
+  'fight':1,
+  'flying':2,
+  'poison':3,
+  'ground':4,
+  'rock':5,
+  'bug':6,
+  'ghost':7,
+  'steel':8,
+  'fire':9,
+  'water':10,
+  'grass':11,
+  'electric':12,
+  'psychic':13,
+  'ice':14,
+  'dragon':15,
+  'dark':16,
+  'fairy':17
+};
+
+let defMatrix = [
+  [1,1,1,1,1,.5,1,0,.5,1,1,1,1,1,1,1,1,1],
+  [2,1,.5,.5,1,2,.5,0,2,1,1,14,1,.5,2,1,2,.5],
+  [1,2,1,1,1,.5,2,1,.5,1,1,2,.5,1,1,1,1,1],
+  [1,1,1,.5,.5,.5,1,.5,0,1,1,2,1,1,1,1,1,2],
+  [1,1,0,2,1,2,.5,1,2,2,1,.5,2,1,1,1,1,1],
+  [1,.5,2,1,.5,1,2,1,.5,2,1,1,1,1,2,1,1,1],
+  [1,.5,.5,.5,1,1,1,.5,.5,.5,1,2,1,2,1,1,2,.5],
+  [0,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,.5,1],
+  [1,1,1,1,1,2,1,1,.5,.5,.5,1,.5,1,2,1,1,2],
+  [1,1,1,1,1,.5,2,1,2,.5,.5,2,1,1,2,.5,1,1],
+  [1,1,1,1,2,2,1,1,1,2,.5,.5,1,1,1,.5,1,1],
+  [1,1,.5,.5,2,2,.5,1,.5,.5,2,.5,1,1,1,.5,1,1],
+  [1,1,2,1,0,1,1,1,1,1,2,.5,.5,1,1,.5,1,1],
+  [1,2,1,2,1,1,1,1,.5,1,1,1,1,.5,1,1,0,1],
+  [1,1,2,1,2,1,1,1,.5,.5,.5,2,1,1,.5,2,1,1],
+  [1,1,1,1,1,1,1,1,.5,1,1,1,1,1,1,2,1,0],
+  [1,.5,1,1,1,1,1,2,1,1,1,1,1,2,1,1,.5,.5],
+  [1,2,1,.5,1,1,1,1,.5,.5,1,1,1,1,1,2,2,1]
+]
+
+//code for defense matrix
+function buildDefenseStats(types) {
+  var defenseStatsMap = new Map();
+  for (let i = 0; i < types.length; ++i) {
+      typeName = types[i].type.name;
+      typeRow = defMatrix[typeLocation[typeName]];
+      for (const [key, value] of Object.entries(typeLocation)) {
+          let multiplier = typeRow[value];
+          if (defenseStatsMap.has(key)) {
+              defenseStatsMap.set(key, (defenseStatsMap.get(key) * multiplier));
+          }
+          else {
+              if (multiplier != 1) {
+                  defenseStatsMap.set(key, multiplier);
+              }
+          }
+      }     
+  }
+  return defenseStatsMap;
+}
+//end defense matrix code
 
 //getAllPokemons();
 display20Poke();
