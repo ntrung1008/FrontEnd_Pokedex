@@ -176,21 +176,24 @@ var displayPokemon = Pokemon => {
                 sprite: response.sprites.front_default,
                 name: response.name.replace("-", " ")
               };
-              var VarietyHTMLString = `
-                <div class="variety">
-                  <p id="variety-name" class="variety-name"> 
-                    ${PokemonVariety.name}
-                  </p>
-                  <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}"> 
-                </div>
-                `;
-              var variety_display = document.getElementById(
-                "extra-info" + Pokemon.id
-              );
-              variety_display.insertAdjacentHTML(
-                "beforeend",
-                VarietyHTMLString
-              );
+              if (PokemonVariety.sprite != null)
+              {
+                var VarietyHTMLString = `
+                  <div class="variety">
+                    <p id="variety-name" class="variety-name"> 
+                      ${PokemonVariety.name}
+                    </p>
+                    <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}"> 
+                  </div>
+                  `;
+                var variety_display = document.getElementById(
+                  "extra-info" + Pokemon.id
+                );
+                variety_display.insertAdjacentHTML(
+                  "beforeend",
+                  VarietyHTMLString
+                );
+              }
             }
           );
         }
@@ -381,7 +384,7 @@ var Close = () => {
   remove.parentElement.removeChild(remove);
 };
 
-let typeLocation = {
+const typeLocation = {
   'normal':0,
   'fight':1,
   'flying':2,
@@ -402,7 +405,28 @@ let typeLocation = {
   'fairy':17
 };
 
-let defMatrix = [
+const locationType = {
+  0:'normal',
+  1:'fight',
+  2:'flying',
+  3:'poison',
+  4:'ground',
+  5:'rock',
+  6:'bug',
+  7:'ghost',
+  8:'steel',
+  9:'fire',
+  10:'water',
+  11:'grass',
+  12:'electric',
+  13:'psyschic',
+  14:'ice',
+  15:'dragon',
+  16:'dark',
+  17:'fairy'
+};
+
+const defMatrix = [
   [1,1,1,1,1,.5,1,0,.5,1,1,1,1,1,1,1,1,1],
   [2,1,.5,.5,1,2,.5,0,2,1,1,14,1,.5,2,1,2,.5],
   [1,2,1,1,1,.5,2,1,.5,1,1,2,.5,1,1,1,1,1],
@@ -427,10 +451,12 @@ let defMatrix = [
 function buildDefenseStats(types) {
   var defenseStatsMap = new Map();
   for (let i = 0; i < types.length; ++i) {
-      typeName = types[i].type.name;
-      typeRow = defMatrix[typeLocation[typeName]];
-      for (const [key, value] of Object.entries(typeLocation)) {
-          let multiplier = typeRow[value];
+      let typeName = types[i].type.name;
+      let typeIndex = typeLocation[typeName];
+      console.log(typeIndex);
+      for (let j = 0; j < defMatrix.length; ++j) {
+          let multiplier = defMatrix[j][typeIndex];
+          let key = locationType[j];
           if (defenseStatsMap.has(key)) {
               defenseStatsMap.set(key, (defenseStatsMap.get(key) * multiplier));
           }
