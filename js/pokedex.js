@@ -1,3 +1,4 @@
+
 var pokedex = document.getElementById("pokedex");
 var P = new Pokedex.Pokedex();
 var Poke_cache = [];
@@ -13,6 +14,7 @@ var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
       .then(function (response) {
+        console.log(response.name);
         const Pokemon = {
           id: response.id,
           name: response.name.replace("-", " "),
@@ -32,9 +34,11 @@ var getAllPokemons = input => {
           attack: response.stats[4].base_stat,
           hp: response.stats[5].base_stat,
           species: response.species.name,
-          moves: response.moves
+          moves: response.moves,
+          defense_stats: buildDefenseStats(response.types)
         };
         displayPokemon(Pokemon);
+        console.log(Pokemon.defense_stats);
       });
   }
 };
@@ -103,6 +107,10 @@ var displayPokemon = Pokemon => {
       200) *
     100}%;">${Pokemon.special_defense}</div>
         </div>
+        <div class="section-title">Damage Multiplier When Attacked</div>
+        <div class="defense-stats">
+            <table class="info" id="defense${Pokemon.id}"></table>
+        </div> 
         <div class="section-title">Other Forms</div>
         <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
         <div class="section-title">Moves</div>
@@ -116,11 +124,25 @@ var displayPokemon = Pokemon => {
         <div id="move-info-egg${Pokemon.id}" class="move-info">Moves learn from breeding
         </div>
 
-        <div 
       </div>
     </div>
     `;
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
+
+  defenseStatsDiv = document.getElementById("defense" + Pokemon.id);
+  for (const [key, value] of Pokemon.defense_stats.entries()) {
+    if (value != 1) {
+      let defenseStatsHtml = `
+      <tr>
+        <td>${key}: </td>
+        <td class="info-value">${value}x</td>
+      </tr>
+      `
+      defenseStatsDiv.insertAdjacentHTML("beforeend", defenseStatsHtml);
+    }
+    
+  }
+
   var moves = Pokemon.moves;
   //console.log(moves);
 
@@ -154,21 +176,24 @@ var displayPokemon = Pokemon => {
                 sprite: response.sprites.front_default,
                 name: response.name.replace("-", " ")
               };
-              var VarietyHTMLString = `
-                <div class="variety">
-                  <p id="variety-name" class="variety-name"> 
-                    ${PokemonVariety.name}
-                  </p>
-                  <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}"> 
-                </div>
-                `;
-              var variety_display = document.getElementById(
-                "extra-info" + Pokemon.id
-              );
-              variety_display.insertAdjacentHTML(
-                "beforeend",
-                VarietyHTMLString
-              );
+              if (PokemonVariety.sprite != null)
+              {
+                var VarietyHTMLString = `
+                  <div class="variety">
+                    <p id="variety-name" class="variety-name"> 
+                      ${PokemonVariety.name}
+                    </p>
+                    <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}"> 
+                  </div>
+                  `;
+                var variety_display = document.getElementById(
+                  "extra-info" + Pokemon.id
+                );
+                variety_display.insertAdjacentHTML(
+                  "beforeend",
+                  VarietyHTMLString
+                );
+              }
             }
           );
         }
@@ -358,6 +383,93 @@ var Close = () => {
   var remove = document.querySelector(".popup");
   remove.parentElement.removeChild(remove);
 };
+
+const typeLocation = {
+  'normal':0,
+  'fight':1,
+  'flying':2,
+  'poison':3,
+  'ground':4,
+  'rock':5,
+  'bug':6,
+  'ghost':7,
+  'steel':8,
+  'fire':9,
+  'water':10,
+  'grass':11,
+  'electric':12,
+  'psychic':13,
+  'ice':14,
+  'dragon':15,
+  'dark':16,
+  'fairy':17
+};
+
+const locationType = {
+  0:'normal',
+  1:'fight',
+  2:'flying',
+  3:'poison',
+  4:'ground',
+  5:'rock',
+  6:'bug',
+  7:'ghost',
+  8:'steel',
+  9:'fire',
+  10:'water',
+  11:'grass',
+  12:'electric',
+  13:'psyschic',
+  14:'ice',
+  15:'dragon',
+  16:'dark',
+  17:'fairy'
+};
+
+const defMatrix = [
+  [1,1,1,1,1,.5,1,0,.5,1,1,1,1,1,1,1,1,1],
+  [2,1,.5,.5,1,2,.5,0,2,1,1,14,1,.5,2,1,2,.5],
+  [1,2,1,1,1,.5,2,1,.5,1,1,2,.5,1,1,1,1,1],
+  [1,1,1,.5,.5,.5,1,.5,0,1,1,2,1,1,1,1,1,2],
+  [1,1,0,2,1,2,.5,1,2,2,1,.5,2,1,1,1,1,1],
+  [1,.5,2,1,.5,1,2,1,.5,2,1,1,1,1,2,1,1,1],
+  [1,.5,.5,.5,1,1,1,.5,.5,.5,1,2,1,2,1,1,2,.5],
+  [0,1,1,1,1,1,1,2,1,1,1,1,1,2,1,1,.5,1],
+  [1,1,1,1,1,2,1,1,.5,.5,.5,1,.5,1,2,1,1,2],
+  [1,1,1,1,1,.5,2,1,2,.5,.5,2,1,1,2,.5,1,1],
+  [1,1,1,1,2,2,1,1,1,2,.5,.5,1,1,1,.5,1,1],
+  [1,1,.5,.5,2,2,.5,1,.5,.5,2,.5,1,1,1,.5,1,1],
+  [1,1,2,1,0,1,1,1,1,1,2,.5,.5,1,1,.5,1,1],
+  [1,2,1,2,1,1,1,1,.5,1,1,1,1,.5,1,1,0,1],
+  [1,1,2,1,2,1,1,1,.5,.5,.5,2,1,1,.5,2,1,1],
+  [1,1,1,1,1,1,1,1,.5,1,1,1,1,1,1,2,1,0],
+  [1,.5,1,1,1,1,1,2,1,1,1,1,1,2,1,1,.5,.5],
+  [1,2,1,.5,1,1,1,1,.5,.5,1,1,1,1,1,2,2,1]
+]
+
+//code for defense matrix
+function buildDefenseStats(types) {
+  var defenseStatsMap = new Map();
+  for (let i = 0; i < types.length; ++i) {
+      let typeName = types[i].type.name;
+      let typeIndex = typeLocation[typeName];
+      console.log(typeIndex);
+      for (let j = 0; j < defMatrix.length; ++j) {
+          let multiplier = defMatrix[j][typeIndex];
+          let key = locationType[j];
+          if (defenseStatsMap.has(key)) {
+              defenseStatsMap.set(key, (defenseStatsMap.get(key) * multiplier));
+          }
+          else {
+              if (multiplier != 1) {
+                  defenseStatsMap.set(key, multiplier);
+              }
+          }
+      }     
+  }
+  return defenseStatsMap;
+}
+//end defense matrix code
 
 //getAllPokemons();
 display20Poke();

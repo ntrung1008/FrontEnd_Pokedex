@@ -119,6 +119,15 @@
   justify-content: center;
 }
 
+.defense-stats {
+  display: flex;
+  width: 100%;
+}
+
+.defense-stats-table {
+  width: 100%;
+}
+
 #variety-title {
   display: flex;
   font-family: 'Bangers';
