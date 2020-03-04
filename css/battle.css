@@ -1,0 +1,63 @@
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0%;
+    background-color: lightgray;
+    font-family: 'Bangers';
+}
+
+#ChoosePokemonInput {
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10%;
+}
+
+#BattleButtonWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.pokemonInput {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+#ComparisonWrapper {
+    margin: 5%;
+}
+
+#Comparison-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border-radius: 2%;
+}
+
+@keyframes fadeImageIn{
+    from { opacity: 0; } to { opacity: 1; };
+}
+
+#Pokemon-pics {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 5%;
+    animation-name: fadeImageIn;
+    animation-duration: 1.5s;
+}
+
+.Pokemon-1 {
+    background-color: #2a75bb;
+}
+
+.Pokemon-2 {
+    background-color: #3b3b3b;
+}
+

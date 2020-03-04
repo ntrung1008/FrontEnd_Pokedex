@@ -1,0 +1,28 @@
+@keyframes expandBar {
+    from { width: 0; } to { width:var(--bar-value); }
+}
+
+#Comparison-statbars {
+    font-family: 'Bangers';
+    width: 50%;
+}
+
+.stat-bars-label p{
+    margin: 0%;
+}
+
+.comparison-bar1 {
+    width: var(--bar-value);
+    background-color: #2a75bb;
+    color: white;
+    animation-name: expandBar;
+    animation-duration: 1s;
+}
+
+.comparison-bar2 {    width: var(--bar-value);
+    width: var(--bar-value);
+    background-color: #3b3b3b;
+    color: white;
+    animation-name: expandBar;
+    animation-duration: 1s;
+}

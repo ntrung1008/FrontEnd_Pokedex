@@ -47,6 +47,16 @@ body {
   font-weight: bolder;
 }
 
+
+@keyframes fadeMoveIn{
+  from { opacity: 0; } to { opacity: 1; };
+}
+
+.search-body {
+  animation-name: fadeMoveIn;
+  animation-duration: 2s;
+}
+
 .search-body button:hover {
   background-color: #2a75bb;
   color: white;

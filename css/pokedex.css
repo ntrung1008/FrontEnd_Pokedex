@@ -16,6 +16,10 @@
   justify-content: center;
 }
 
+@keyframes fadeCardIn{
+  from { opacity: 0; } to { opacity: 1; };
+}
+
 .flip-card {
   width:45%;
   height: 400px;
@@ -26,6 +30,8 @@
   cursor: pointer;
   background: lightgray;
   margin: 2%;
+  animation-name: fadeCardIn;
+  animation-duration: 2s;
 }
 
 .flip-card .card-front {
