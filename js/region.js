@@ -5,12 +5,12 @@ var search = () => {
   //remove previous element if exist
   var remove = document.getElementById("region_display");
   remove.innerHTML = "";
-
   //
 
   var regions = document.getElementById("regions");
   var selected_region = regions.options[regions.selectedIndex].value;
 
+  //User chooses Kanto region
   if (selected_region == "kanto") {
     P.getRegionByName("kanto") // with Promise
       .then(function(response) {
@@ -21,7 +21,9 @@ var search = () => {
         };
         displayRegion(RegionInfo);
       });
-  } else if (selected_region == "johto") {
+  } 
+  //User chooses Johto region
+  else if (selected_region == "johto") {
     P.getRegionByName("johto") // with Promise
       .then(function(response) {
         const RegionInfo = {
@@ -31,7 +33,9 @@ var search = () => {
         };
         displayRegion(RegionInfo);
       });
-  } else if (selected_region == "hoenn") {
+  } 
+  //User chooses Hoenn region
+  else if (selected_region == "hoenn") {
     P.getRegionByName("hoenn") // with Promise
       .then(function(response) {
         const RegionInfo = {
@@ -41,7 +45,9 @@ var search = () => {
         };
         displayRegion(RegionInfo);
       });
-  } else if (selected_region == "sinnoh") {
+  } 
+  //User chooses Sinnoh region
+  else if (selected_region == "sinnoh") {
     P.getRegionByName("sinnoh") // with Promise
       .then(function(response) {
         const RegionInfo = {
@@ -51,7 +57,9 @@ var search = () => {
         };
         displayRegion(RegionInfo);
       });
-  } else if (selected_region == "unova") {
+  } 
+  //User chooses Unova region
+  else if (selected_region == "unova") {
     P.getRegionByName("unova") // with Promise
       .then(function(response) {
         const RegionInfo = {
@@ -61,7 +69,9 @@ var search = () => {
         };
         displayRegion(RegionInfo);
       });
-  } else if (selected_region == "kalos") {
+  }
+  //User chooses  Kalos region 
+  else if (selected_region == "kalos") {
     P.getRegionByName("kalos") // with Promise
       .then(function(response) {
         const RegionInfo = {
@@ -71,7 +81,9 @@ var search = () => {
         };
         displayRegion(RegionInfo);
       });
-  } else if (selected_region == "alola") {
+  } 
+  //User chooses Alola region
+  else if (selected_region == "alola") {
     P.getRegionByName("alola") // with Promise
       .then(function(response) {
         const RegionInfo = {
@@ -84,6 +96,14 @@ var search = () => {
   }
 };
 
+//This function will get the region info based on what the user chooses
+//Every REGION has different LOCATIONS
+//Every LOCATION has different AREAS
+//Every AREA has different POKEMONS
+//So this function will first use the region name to send a request for Locations names
+//Then for each locaiton names, it will send a request for area names
+//Then  for each area names, it will send a request for the pokemon in that area
+//Then it will make HTMLStrings based on the reponses it gets back and insert it into the main html page
 var displayRegion = RegionInfo => {
   if (RegionInfo.name == "Kanto") {
     //insert Region name and map

@@ -14,9 +14,11 @@ var search = () => {
   var categories = document.getElementById("categories");
   var selected_category = categories.options[categories.selectedIndex].value;
 
+  //If the search field is empty, display error with Pikachu gif
   if (search_input.length == 0) {
     displayPikachu();
   } else {
+    //If the user wants to search a move by name, then we only need to display one move
     if (selected_category == "name") {
       P.getMoveByName(search_input) // with Promise
         .then(function (response) {
@@ -45,6 +47,8 @@ var search = () => {
           displayMove(Move);
         });
     }
+    //Otherwise if the user wants to look at a list of moves based on ailments or damage  type then we need to
+    //display them as a list
     if (selected_category == "ailment") {
       P.getMoveAilmentByName(search_input) // with Promise
         .then(function (response) {
@@ -62,6 +66,7 @@ var search = () => {
   }
 };
 
+//display only one move, used when user search move by name
 var displayMove = Move => {
   var MoveHTMLString = `
       <div id ="move-card" class="card">
@@ -102,6 +107,7 @@ var displayMove = Move => {
   move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
 };
 
+//display a gif of pikachu when user left the search field empty
 var displayPikachu = () => {
   var MoveHTMLString = `
     <div id = "move-card" class="card">
@@ -111,6 +117,8 @@ var displayPikachu = () => {
     `;
   move_display.insertAdjacentHTML("beforeend", MoveHTMLString);
 };
+
+//display a list of moves when user searches moves by ailments or damage type
 var displayMoveList = MoveList => {
   for (let i = 0; i < MoveList.length; i++) {
     P.getMoveByName(MoveList[i].name) // with Promise

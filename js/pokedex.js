@@ -4,12 +4,16 @@ var P = new Pokedex.Pokedex();
 var Poke_cache = [];
 var maximum = 1;
 
+//This function will display 200 pokemon at a time then remember where it stops at
+//for future calls
 var display20Poke = () => {
   getAllPokemons(maximum);
   maximum += 200;
   console.log(maximum);
 };
 
+//This function send request to get all the pokemons information then send those
+//to display function
 var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     P.getPokemonByName(i) // with Promise
@@ -43,6 +47,8 @@ var getAllPokemons = input => {
   }
 };
 
+//this function take a Pokemon input then generate a HTMLString with that input
+//then insert that HTMLString to the HTML page
 var displayPokemon = Pokemon => {
   var pokemonHTMLString = `
     <div class="flip-card">
@@ -129,6 +135,7 @@ var displayPokemon = Pokemon => {
     `;
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
 
+  //Calculate defense type weakness
   defenseStatsDiv = document.getElementById("defense" + Pokemon.id);
   for (const [key, value] of Pokemon.defense_stats.entries()) {
     if (value != 1) {
@@ -201,6 +208,7 @@ var displayPokemon = Pokemon => {
     });
 
   for (var i = 0; i < moves.length; ++i) {
+    //Sort moves learned by breeding
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "egg"
@@ -212,6 +220,7 @@ var displayPokemon = Pokemon => {
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
 
+    //Sort moves learned by items/machine
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "machine"
@@ -225,6 +234,7 @@ var displayPokemon = Pokemon => {
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
 
+    //Sort moves learned by leveling up
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "level-up"
@@ -238,6 +248,7 @@ var displayPokemon = Pokemon => {
       movesElement.insertAdjacentHTML("beforeend", MoveHTMLString);
     }
 
+    //Sort move learned by tutoring
     if (
       moves[i].version_group_details[moves[i].version_group_details.length - 1]
         .move_learn_method.name == "tutor"
@@ -314,6 +325,7 @@ var Filter = () => {
   }
 };
 
+
 //PopUp Feature
 var getinfo = id => {
   if (!Poke_cache[id]) {
@@ -379,6 +391,7 @@ var PopUpInfo = Pokemon => {
   pokedex.insertAdjacentHTML("beforeend", pokemonHTMLString);
 };
 
+//Close button for pop up card
 var Close = () => {
   var remove = document.querySelector(".popup");
   remove.parentElement.removeChild(remove);
