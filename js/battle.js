@@ -30,9 +30,6 @@ var Filter = () => {
     const input1 = document.getElementById("Input1");
     const input2 = document.getElementById("Input2");
 
-    input1.value = "blastoise";
-    input2.value = "charizard";
-
     const comparisonWrapper = document.getElementById("ComparisonWrapper");
 
     input1Text = input1.value.toUpperCase();
