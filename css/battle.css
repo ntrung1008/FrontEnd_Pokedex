@@ -40,11 +40,17 @@ body {
     border-radius: 2%;
 }
 
+@keyframes fadeImageIn{
+    from { opacity: 0; } to { opacity: 1; };
+}
+
 #Pokemon-pics {
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-top: 5%;
+    animation-name: fadeImageIn;
+    animation-duration: 1.5s;
 }
 
 .Pokemon-1 {

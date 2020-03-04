@@ -13,6 +13,10 @@ body {
   transform: scale(2);
 }
 
+@keyframes fadeLocationIn{
+  from { opacity: 0; } to { opacity: 1; };
+}
+
 .search-body {
   display: flex;
   flex-direction: column;
@@ -21,6 +25,8 @@ body {
   margin: 50px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   font-family: 'Bangers';
+  animation-name: fadeLocationIn;
+  animation-duration: 2s;
 }
 
 .search-body > * {
