@@ -253,5 +253,9 @@ button {
   width: 1%;
   height: auto;
 }
+.move-categories{
+  background-color: lightgreen;
+  font-size: large;
+}
 
 

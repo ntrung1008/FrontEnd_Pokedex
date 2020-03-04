@@ -121,13 +121,17 @@ var displayPokemon = Pokemon => {
         <div id = "extra-info${Pokemon.id}" class="extra-info"></div>
         <div class="section-title">Moves</div>
         <div id="move-info${Pokemon.id}" class="move-info"></div>
-        <div id="move-info-level${Pokemon.id}" class="move-info">Moves learn from level up
+        <div id="move-info-level${Pokemon.id}" class="move-info">
+            <div class="move-categories">Moves learn from level up </div>
         </div>
-        <div id="move-info-tutor${Pokemon.id}" class="move-info">Moves learn from tutor
+        <div id="move-info-tutor${Pokemon.id}" class="move-info">
+          <div class="move-categories">Moves learn from tutor </div>
         </div>
-        <div id="move-info-machine${Pokemon.id}" class="move-info">Moves learn from items
+        <div id="move-info-machine${Pokemon.id}" class="move-info">
+          <div class="move-categories">Moves learn from items </div>
         </div>
-        <div id="move-info-egg${Pokemon.id}" class="move-info">Moves learn from breeding
+        <div id="move-info-egg${Pokemon.id}" class="move-info">
+          <div class="move-categories">Moves learn from breeding </div>
         </div>
 
       </div>
