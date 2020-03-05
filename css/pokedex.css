@@ -39,7 +39,7 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  transform: perspective(500px) rotateY(0deg);
+  transform: perspective(5000px) rotateY(0deg);
   transition: transform 0.55s linear;
   display: flex;
   flex-direction: column;
@@ -63,7 +63,7 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  transform: perspective(500px) rotateY(180deg);
+  transform: perspective(5000px) rotateY(180deg);
   transition: transform 0.55s linear;
   overflow: auto;
   display: flex;
