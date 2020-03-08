@@ -2,6 +2,7 @@ var P = new Pokedex.Pokedex();
 var Poke_cache = {};
 var maximum = 1;
 
+//Sends request to get all pokemon data, then saves that data to a pokemon cache
 var getAllPokemonsForBattle = input => {
     for (let i = input; i <= 807; ++i) {
       P.getPokemonByName(i) // with Promise
@@ -26,6 +27,7 @@ var getAllPokemonsForBattle = input => {
     }
 };
 
+//gets the user input for pokemon to compare and displays a comparison card
 var Filter = () => {
     const input1 = document.getElementById("Input1");
     const input2 = document.getElementById("Input2");
