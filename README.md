@@ -1,5 +1,5 @@
 # Pokedex
-This is an application meant to provide the user with on-demand information about different Pokemon. It provides a trading card-like interface to view information about each Pokemon. It also provides data for a given move or a given region, and provides an interface for viewing data for a matchup between two pokemon. 
+This is an application meant to provide the user with on-demand information about different Pokemon. It provides a dashboard with a trading card-like interface to view information about each Pokemon. It also provides data for a given move or a given region, and provides an interface for viewing data for a matchup between two pokemon. 
 
 ## API
 This application aggregates data gathered using the pokeAPI. This API provides a large amount of Pokemon-related data, you can find out more at https://pokeapi.co/.
