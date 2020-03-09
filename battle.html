@@ -31,20 +31,23 @@
         </div>
       </div>
     </div>
-
-    <div id="ChoosePokemonInput">
-      <div id="Choice1" class="pokemonInput">
-        <input id="Input1" type="text"></input>
+    <div id="BattleCard">
+      <form id="ChoosePokemonInput">
+        <div id="ChoiceLabel">Please enter the two Pokemon you would like to compare</div>
+        <div id="Choice1" class="pokemonInput">
+          <input id="Input1" type="text" required></input>
+        </div>
+        <div>Vs.</div>
+        <div id="Choice2" class="pokemonInput">
+          <input id="Input2" type="text" required></input>
+        </div>
+        <div id="BattleButtonWrapper">
+            <input type="submit" value ="Go!" id="Battle" onclick="Filter(event)"></button>
+          </div>
+        </div>
+      </form>
+      <div id="ComparisonWrapper">
       </div>
-      <div id="Choice2" class="pokemonInput">
-        <input id="Input2" type="text"></input>
-      </div>
-    </div>
-    <div id="BattleButtonWrapper">
-      <button id="Battle" onclick="Filter()">Battle</button>
-    </div>
-    
-    <div id="ComparisonWrapper">
     </div>
 
     <script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>

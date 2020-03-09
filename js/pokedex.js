@@ -397,6 +397,8 @@ var Close = () => {
   remove.parentElement.removeChild(remove);
 };
 
+
+//This is used to find the index in the defense matrix below for a pokemon type.
 const typeLocation = {
   'normal':0,
   'fight':1,
@@ -418,6 +420,7 @@ const typeLocation = {
   'fairy':17
 };
 
+//This is used to find the pokemon type name for an index in the defense matrix below.
 const locationType = {
   0:'normal',
   1:'fight',
@@ -439,6 +442,8 @@ const locationType = {
   17:'fairy'
 };
 
+//This matrix represents the attack multiplier against a given pokemon type for 
+//another type. Base off of the attack matrix at https://bulbapedia.bulbagarden.net/wiki/Type#In_Pok.C3.A9mon_GO
 const defMatrix = [
   [1,1,1,1,1,.5,1,0,.5,1,1,1,1,1,1,1,1,1],
   [2,1,.5,.5,1,2,.5,0,2,1,1,14,1,.5,2,1,2,.5],
@@ -460,7 +465,8 @@ const defMatrix = [
   [1,2,1,.5,1,1,1,1,.5,.5,1,1,1,1,1,2,2,1]
 ]
 
-//code for defense matrix
+//calculates the effectiveness of different defense types against the types of 
+//the current pokemon. 
 function buildDefenseStats(types) {
   var defenseStatsMap = new Map();
   for (let i = 0; i < types.length; ++i) {
