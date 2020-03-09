@@ -55,6 +55,7 @@ body {
 .search-body {
   animation-name: fadeMoveIn;
   animation-duration: 2s;
+  border-radius: 15px;
 }
 
 .search-body button:hover {

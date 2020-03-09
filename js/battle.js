@@ -28,9 +28,15 @@ var getAllPokemonsForBattle = input => {
 };
 
 //gets the user input for pokemon to compare and displays a comparison card
-var Filter = () => {
+var Filter = (event) => {
     const input1 = document.getElementById("Input1");
     const input2 = document.getElementById("Input2");
+    const form = document.getElementById("ChoosePokemonInput");
+    const battle = document.getElementById("Battle");
+
+    if (input1.checkValidity() && input2.checkValidity()) {
+        event.preventDefault();
+    }
 
     const comparisonWrapper = document.getElementById("ComparisonWrapper");
 
@@ -92,10 +98,46 @@ var Filter = () => {
             comparisonCard.remove();
         }
 
+        let errorMessage = document.getElementById("NotFoundMessage");
+        if (errorMessage != null) {
+            errorMessage.remove();       
+        }
+
         comparisonWrapper.insertAdjacentHTML("beforeend", comparisonHtmlString);
 
     }
-    else console.log("not found");
+    else {
+        let errorMessage = document.getElementById("NotFoundMessage");
+        if (errorMessage != null) {
+            errorMessage.remove();       
+        }
+        
+        let errorString = "Couldn't find Pokemon to match ";
+
+        console.log(input1Text);
+        if (!(input1Text in Poke_cache) && input1Text != "") {
+            var missingPokemon1 = input1Text;
+            errorString += missingPokemon1;
+        }
+        if (!(input2Text in Poke_cache) && input2Text != ""){
+            var missingPokemon2 = input2Text;
+            errorString += (", " + missingPokemon2);
+        }
+        let errorHtml = `
+            <div id="NotFoundMessage" class="notFoundError">
+                <p>${errorString}</p>
+            </div>`
+
+        let comparisonCard = document.getElementById("Comparison-card");
+        if (comparisonCard != null) {
+            comparisonCard.remove();
+        }
+
+        if (input1Text != "" && input2Text != "") {
+            comparisonWrapper.insertAdjacentHTML("beforeend", errorHtml);
+        }
+        console.log("not found");
+    }
 
 
 };
