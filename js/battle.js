@@ -89,6 +89,20 @@ var Filter = (event) => {
                         <div class="comparison-bar1" style="--bar-value:${pokemonForComparison[0].defense}%;">${pokemonForComparison[0].defense}</div>
                         <div class="comparison-bar2" style="--bar-value:${pokemonForComparison[1].defense}%;">${pokemonForComparison[1].defense}</div>
                     </div>
+                    <div class="stat-bars-label">
+                        <p>Special Attack</p>
+                    </div>
+                    <div id="special-attack-bars" class="stat-bars">
+                        <div class="comparison-bar1" style="--bar-value:${pokemonForComparison[0].special_attack}%;">${pokemonForComparison[0].special_attack}</div>
+                        <div class="comparison-bar2" style="--bar-value:${pokemonForComparison[1].special_attack}%;">${pokemonForComparison[1].special_attack}</div>
+                    </div>
+                    <div class="stat-bars-label">
+                        <p>Special Defense</p>
+                    </div>
+                    <div id="special-defense-bars" class="stat-bars">
+                        <div class="comparison-bar1" style="--bar-value:${pokemonForComparison[0].special_defense}%;">${pokemonForComparison[0].special_defense}</div>
+                        <div class="comparison-bar2" style="--bar-value:${pokemonForComparison[1].special_defense}%;">${pokemonForComparison[1].special_defense}</div>
+                    </div>
                 </div>
             </div>
         `
