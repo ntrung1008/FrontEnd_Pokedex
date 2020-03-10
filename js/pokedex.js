@@ -405,7 +405,7 @@ var Close = () => {
 //This is used to find the index in the defense matrix below for a pokemon type.
 const typeLocation = {
   'normal':0,
-  'fight':1,
+  'fighting':1,
   'flying':2,
   'poison':3,
   'ground':4,
@@ -427,7 +427,7 @@ const typeLocation = {
 //This is used to find the pokemon type name for an index in the defense matrix below.
 const locationType = {
   0:'normal',
-  1:'fight',
+  1:'fighting',
   2:'flying',
   3:'poison',
   4:'ground',
@@ -450,7 +450,7 @@ const locationType = {
 //another type. Base off of the attack matrix at https://bulbapedia.bulbagarden.net/wiki/Type#In_Pok.C3.A9mon_GO
 const defMatrix = [
   [1,1,1,1,1,.5,1,0,.5,1,1,1,1,1,1,1,1,1],
-  [2,1,.5,.5,1,2,.5,0,2,1,1,14,1,.5,2,1,2,.5],
+  [2,1,.5,.5,1,2,.5,0,2,1,1,1,1,.5,2,1,2,.5],
   [1,2,1,1,1,.5,2,1,.5,1,1,2,.5,1,1,1,1,1],
   [1,1,1,.5,.5,.5,1,.5,0,1,1,2,1,1,1,1,1,2],
   [1,1,0,2,1,2,.5,1,2,2,1,.5,2,1,1,1,1,1],
