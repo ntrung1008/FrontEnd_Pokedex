@@ -90,7 +90,7 @@ var displayMove = Move => {
             </tr>
             <tr>
               <td class="move-label">Damage Type:</td>
-              <td class="move-data">${Move.damage_type} <img class= "damage_type_icon" src="${Move.damage_type_icon}"></td>
+              <td class="move-data">${Move.damage_type} <img class= "damage_type_icon" src="${Move.damage_type_icon}" alt="damage type icon"></td>
             </tr>
             <tr>
               <td class="move-label">Effect:</td>
@@ -164,7 +164,7 @@ var displayMoveList = MoveList => {
               </tr>
               <tr>
                 <td class="move-label">Damage Type:</td>
-                <td class="move-data">${Move.damage_type} <img class= "damage_type_icon" src="${Move.damage_type_icon}"></td>
+                <td class="move-data">${Move.damage_type} <img class= "damage_type_icon" src="${Move.damage_type_icon}" alt="Damage Type Icon"></td>
               </tr>
               <tr>
                 <td class="move-label">Effect:</td>

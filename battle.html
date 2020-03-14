@@ -35,11 +35,13 @@
       <form id="ChoosePokemonInput">
         <div id="ChoiceLabel">Please enter the two Pokemon you would like to compare</div>
         <div id="Choice1" class="pokemonInput">
-          <input id="Input1" type="text" required></input>
+          <label for="Input1">Pokemon 1:</label>
+          <input id="Input1" type="text" required name="Pokemon1"></input>
         </div>
         <div>Vs.</div>
         <div id="Choice2" class="pokemonInput">
-          <input id="Input2" type="text" required></input>
+          <label for="Input2">Pokemon2:</label>
+          <input id="Input2" type="text" required name="Pokemon2"></input>
         </div>
         <div id="BattleButtonWrapper">
             <input type="submit" value ="Go!" id="Battle" onclick="Filter(event)"></button>
