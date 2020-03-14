@@ -54,10 +54,10 @@ var Filter = (event) => {
                 </div>
                 <div id="Pokemon-pics">
                     <div class="Pokemon-1">
-                        <img class="card-image " src="${pokemonForComparison[0].default}">
+                        <img class="card-image " src="${pokemonForComparison[0].default}" alt="Pokemon1">
                     </div>
                     <div class="Pokemon-2">
-                        <img class="card-image " src="${pokemonForComparison[1].default}">
+                        <img class="card-image " src="${pokemonForComparison[1].default}" alt="Pokemon2">
                     </div>
                 </div>
                 <div id="Comparison-statbars" class="stat-bars">

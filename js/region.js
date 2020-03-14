@@ -110,7 +110,7 @@ var displayRegion = RegionInfo => {
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
-            <img class = "region-pic" src ="resources/Kanto.png">
+            <img class = "region-pic" src ="resources/Kanto.png" alt="Region Map">
             <div class="region-description">
               The Kanto region is located east of Johto and south of Sinnoh. All cities in Kanto are named after colors (Viridian City, Lavender Town, Indigo Plateau, etc.), with the exception of Pallet Town, which is also a reference to color.
             </div>
@@ -168,7 +168,7 @@ var displayRegion = RegionInfo => {
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img class= "poke-pic" src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" alt="Sprite Image">
                             `;
                       var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
                       pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
@@ -184,7 +184,7 @@ var displayRegion = RegionInfo => {
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
-            <img class = "region-pic" src ="resources/Johto.png">
+            <img class = "region-pic" src ="resources/Johto.png" alt="Region Image">
             <div class="region-description">
               Johto is located west of Kanto and south of Sinnoh
             </div>
@@ -239,7 +239,7 @@ var displayRegion = RegionInfo => {
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img class= "poke-pic" src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" alt="Sprite Image">
                             `;
                       var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
                       pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
@@ -255,7 +255,7 @@ var displayRegion = RegionInfo => {
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
-            <img class = "region-pic" src ="resources/Hoenn.png">
+            <img class = "region-pic" src ="resources/Hoenn.png" alt="Region Image">
             <div class="region-description">
               Hoenn is located south of Sinnoh. The names of most of the cities in Hoenn are made of two words put together (Little Root, Fort Tree, Slate Port, Ever Grande, etc.) rather than colors or plants as Kanto and Johto 
             </div>
@@ -310,7 +310,7 @@ var displayRegion = RegionInfo => {
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img class= "poke-pic" src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" alt="Pokemon Image">
                             `;
                       var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
                       pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
@@ -326,7 +326,7 @@ var displayRegion = RegionInfo => {
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
-            <img class = "region-pic" src ="resources/Sinnoh.png">
+            <img class = "region-pic" src ="resources/Sinnoh.png" alt="Region Image">
             <div class="region-description">
             Sinnoh is located north of Kanto, Johto, and Hoenn. Most of Sinnoh's routes are on land, having very few water routes, in vast contrast to Hoenn
             </div>
@@ -381,7 +381,7 @@ var displayRegion = RegionInfo => {
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img class= "poke-pic" src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" alt="Pokemon Image">
                             `;
                       var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
                       pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
@@ -397,7 +397,7 @@ var displayRegion = RegionInfo => {
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
-            <img class = "region-pic" src ="resources/Unova.png">
+            <img class = "region-pic" src ="resources/Unova.png" alt="Region Image">
             <div class="region-description">
             Unova is far away from the four other large regions, and the Pokémon which inhabit Unova are diverse and different from those of Kanto, Johto, Hoenn, and Sinnoh.            </div>
         </div>
@@ -451,7 +451,7 @@ var displayRegion = RegionInfo => {
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img class= "poke-pic" src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" alt="Pokemon Image">
                             `;
                       var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
                       pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);
@@ -467,7 +467,7 @@ var displayRegion = RegionInfo => {
     var RegionHTMLString = `
         <div id ="region-card" class="card" >
             <h2 class="card-title"  >Welcome to ${RegionInfo.name} !!!</h2>
-            <img class = "region-pic" src ="resources/Kalos.png">
+            <img class = "region-pic" src ="resources/Kalos.png" alt="Region Image">
             <div class="region-description">
             The Kalos region is shaped like a five-pointed star, with one of its biggest cities being Lumiose City in the north-central part of the region. It features a vast network of rivers and waterways snaking through much of its landscape, cities and towns.            </div>
         </div>
@@ -521,7 +521,7 @@ var displayRegion = RegionInfo => {
                     .then(function(response) {
                       var sprite = response.sprites["front_default"];
                       var PokemonSpriteHTMLSTRING = `
-                                <img class= "poke-pic" src="${sprite}" >
+                                <img class= "poke-pic" src="${sprite}" alt="Pokemon Image">
                             `;
                       var pokemon_sprite = document.getElementById(Area_info.Pokemon_encounters[k].pokemon.name +Areas[j].name);
                       pokemon_sprite.insertAdjacentHTML("beforeend",PokemonSpriteHTMLSTRING);

@@ -56,17 +56,17 @@ var displayPokemon = Pokemon => {
         <p class="card-title" onclick ="getinfo(${Pokemon.id})" >${
     Pokemon.name
     } </p>
-        <img class="card-image default" src="${Pokemon.display}">
+        <img class="card-image default" src="${Pokemon.display}" alt="Default Image">
       </div>
       <div class="card-back">
         <div class="img-row">
-          <img class="card-image " src="${Pokemon.default}">
-          <img class="card-image " src="${Pokemon.shiny}"/>
+          <img class="card-image " src="${Pokemon.default}" alt="Default Image">
+          <img class="card-image " src="${Pokemon.shiny}" alt="Shiny Image"/>
         </div>
         <div class="audio-buttons">
           <img id="volume_logo" src="../FrontEnd_Pokedex/resources/volume-high.svg" onclick="playaudio(${
     Pokemon.id
-    })">
+    })" alt="Sound Logo">
           <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${
     Pokemon.id
     }.wav" ></audio>
@@ -194,7 +194,7 @@ var displayPokemon = Pokemon => {
                     <p id="variety-name" class="variety-name"> 
                       ${PokemonVariety.name}
                     </p>
-                    <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}"> 
+                    <img id="variety-pic class="variety-pic" src ="${PokemonVariety.sprite}" alt="Variety Image"> 
                   </div>
                   `;
                 var variety_display = document.getElementById(
@@ -371,10 +371,10 @@ var PopUpInfo = Pokemon => {
     <button id="CloseButton" onclick ="Close()">Close</button>
     <div class="card" >
         <div class="img-row">
-          <img class="card-image " src="${Pokemon.default}">
-          <img class="card-image " src="${Pokemon.back_default}">
-          <img class="card-image " src="${Pokemon.shiny}"/>
-          <img class="card-image " src="${Pokemon.back_shiny}"/>
+          <img class="card-image " src="${Pokemon.default}" alt="Default Image"/>
+          <img class="card-image " src="${Pokemon.back_default}" alt="Back Image"/>
+          <img class="card-image " src="${Pokemon.shiny}" alt="Shiny Image"/>
+          <img class="card-image " src="${Pokemon.back_shiny}" alt="Shiny Image"/>
         </div>
         <h2 class="card-title"  >${Pokemon.name} </h2>
         <p>Height: ${Pokemon.height}</p>
@@ -387,7 +387,7 @@ var PopUpInfo = Pokemon => {
         <p>Defense: ${Pokemon.defense}</p>
         <p>Attack: ${Pokemon.attack}</p>
         <p>Hp: ${Pokemon.hp}</p>
-        <img id="volume_logo" src="/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})">
+        <img id="volume_logo" src="/resources/volume-high.svg" onclick="playaudio(${Pokemon.id})" alt="Sound Logo">
         <audio id="audio${Pokemon.id}" src="../FrontEnd_Pokedex/sound/${Pokemon.id}.wav" ></audio>
     </div>
   </div>
