@@ -14,7 +14,7 @@ var display20Poke = () => {
 
 //This function send request to get all the pokemons information then send those
 //to display function
-async var getAllPokemons = input => {
+var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
     await P.getPokemonByName(i) // with Promise
       .then(function (response) {
