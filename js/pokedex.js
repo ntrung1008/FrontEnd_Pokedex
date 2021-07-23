@@ -16,7 +16,7 @@ var display20Poke = () => {
 //to display function
 var getAllPokemons = input => {
   for (let i = input; i < input + 200 && i <= 807; ++i) {
-    P.getPokemonByName(i) // with Promise
+    await P.getPokemonByName(i) // with Promise
       .then(function (response) {
         console.log(response.name);
         const Pokemon = {
